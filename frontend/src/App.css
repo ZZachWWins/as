@@ -406,3 +406,46 @@ footer a, footer button {
 footer input:focus { 
   box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1); /* Soft focus ring */
 }
+
+/* Enhanced Form: Bigger Inputs, Visible Glow Focus */
+.interest-form { 
+  max-width: 500px; /* Slightly wider for presence */
+  margin: 2rem auto; 
+  background: linear-gradient(145deg, #fff, #fffaf0); 
+  padding: 3rem; /* More breathing room */
+  border-radius: 2rem; 
+  box-shadow: 0 25px 50px rgba(220,53,69,0.15); 
+  border: 1px solid rgba(220,53,69,0.08); 
+  position: relative; 
+}
+.form-input, select { 
+  width: 100%; 
+  padding: 1.5rem; /* Taller for easy tap */
+  border: 2px solid #e9ecef; 
+  border-radius: 1.5rem; 
+  font-size: 1.25rem; /* Bolder text */
+  text-align: center; 
+  transition: all 0.4s ease; 
+  background: #fafafa; 
+  color: #333; 
+}
+.form-input:focus, select:focus { 
+  border-color: #dc3545; 
+  transform: scale(1.02); 
+  box-shadow: 0 0 0 8px rgba(220,53,69,0.15), inset 0 1px 0 rgba(255,255,255,0.8); /* Bigger, softer glow */
+  background: #fff; 
+  outline: none; 
+}
+.form-input::placeholder { 
+  color: #9ca3af; /* Visible gray */
+  font-style: italic; 
+  font-weight: 500; 
+}
+select { 
+  cursor: pointer; 
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e"); 
+  background-position: right 1rem center; 
+  background-repeat: no-repeat; 
+  background-size: 1.5em; 
+  padding-right: 2.5rem; 
+}
