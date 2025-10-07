@@ -273,3 +273,51 @@ nav a:hover::after {
 /* Pulse Animation for CTAs */
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
 .pulse { animation: pulse 2s infinite; }
+
+/* src/App.css (Added: Outline Buttons, Footer Cards, FAQ Modern Polish) */
+/* ... (keep all previous styles from last full App.css) ... */
+
+/* New: Outline Button for Hero */
+.btn-outline { 
+  color: #fff; 
+  padding: 1rem 2rem; 
+  border: 2px solid rgba(255,255,255,0.5); 
+  border-radius: 0.75rem; 
+  font-weight: 700; 
+  text-decoration: none; 
+  display: inline-block; 
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+  backdrop-filter: blur(10px); 
+}
+.btn-outline:hover { 
+  background: rgba(255,255,255,0.2); 
+  border-color: #fff; 
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 20px rgba(220,53,69,0.3); 
+}
+
+/* New: Footer Button Cards */
+.footer-btn { 
+  background: #fff; 
+  color: #dc3545; 
+  padding: 0.75rem 1.5rem; 
+  border-radius: 1rem; 
+  font-weight: 600; 
+  text-decoration: none; 
+  display: flex; 
+  align-items: center; 
+  gap: 0.5rem; 
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+  transition: all 0.3s ease; 
+}
+.footer-btn:hover { 
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 20px rgba(220,53,69,0.2); 
+  color: #fd7e14; 
+}
+
+/* Countdown Responsive Tweak (in .urgency) */
+.urgency .flex { flex-wrap: wrap; justify-content: center; } /* Ensures mobile wrap */
+
+/* FAQ Modern Tweaks (Already Integrated Above) */
+.faq-section { /* If needed, but inline styles cover */ }

@@ -1,6 +1,7 @@
-// src/components/FAQ.js (New: Trust Booster – Expandable Questions for Objection Handling)
+// src/components/FAQ.js (Modern: Icon Cards, Chevron Animations, Gradient Accents)
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, ChevronUp } from 'lucide-react'; // Assuming Lucide icons installed; fallback emojis if not
 
 const faqs = [
   {
@@ -45,14 +46,20 @@ const FAQ = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden"
+              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full text-left p-6 font-bold text-gray-800 hover:bg-red-50 transition-colors flex justify-between items-center"
+                className="w-full text-left p-6 font-bold text-gray-800 hover:bg-red-50 transition-colors flex justify-between items-center bg-gradient-to-r from-transparent to-red-100/20"
               >
-                <span>{faq.question}</span>
-                <span className="text-2xl transition-transform">{openIndex === index ? '−' : '+'}</span>
+                <span className="text-lg">{faq.question}</span>
+                <motion.span 
+                  animate={{ rotate: openIndex === index ? 180 : 0 }} 
+                  transition={{ duration: 0.3 }}
+                  className="text-red-500 ml-4"
+                >
+                  <ChevronDown className="w-5 h-5" /> {/* Or use emoji: ↓ */}
+                </motion.span>
               </button>
               <AnimatePresence>
                 {openIndex === index && (
@@ -60,10 +67,10 @@ const FAQ = () => {
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.4, ease: 'easeInOut' }}
                     className="overflow-hidden"
                   >
-                    <p className="p-6 text-gray-600 border-t border-gray-100">{faq.answer}</p>
+                    <p className="p-6 text-gray-700 bg-red-50 border-t border-red-100 leading-relaxed">{faq.answer}</p>
                   </motion.div>
                 )}
               </AnimatePresence>

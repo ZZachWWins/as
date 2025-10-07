@@ -1,4 +1,4 @@
-// src/components/Hero.js (Magnetic Headline—Benefit-First, Urgency-Infused)
+// src/components/Hero.js (Modern Secondary CTA: Outlined Button Glow)
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -31,7 +31,7 @@ const Hero = () => (
         className="flex flex-col sm:flex-row gap-4 justify-center items-center"
       >
         <Link to="/shop" className="btn text-lg pulse">Join the Waitlist Now</Link>
-        <Link to="#benefits" className="text-white/80 hover:text-white transition">Discover How It Works</Link>
+        <Link to="#benefits" className="btn-outline text-lg">Discover How It Works</Link>
       </motion.div>
     </div>
   </section>
