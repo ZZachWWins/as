@@ -1,7 +1,7 @@
 [build]
-  command = "cd frontend && npm ci && npm run build"
+  publish = "frontend/build"
   functions = "functions"
-  publish = "frontend/build"  # Make it relative to root (was absolute—cleaner this way)
+  command = "cd frontend && npm run build"
 
 [[redirects]]
   from = "/*"
