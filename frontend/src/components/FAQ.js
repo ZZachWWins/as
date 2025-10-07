@@ -1,7 +1,7 @@
-// src/components/FAQ.js (Modern: Icon Cards, Chevron Animations, Gradient Accents)
+// src/components/FAQ.js (Fixed ESLint: Removed Unused ChevronUp Import)
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronUp } from 'lucide-react'; // Assuming Lucide icons installed; fallback emojis if not
+import { ChevronDown } from 'lucide-react'; // Removed ChevronUp – only need one with rotate
 
 const faqs = [
   {
@@ -58,7 +58,7 @@ const FAQ = () => {
                   transition={{ duration: 0.3 }}
                   className="text-red-500 ml-4"
                 >
-                  <ChevronDown className="w-5 h-5" /> {/* Or use emoji: ↓ */}
+                  <ChevronDown className="w-5 h-5" />
                 </motion.span>
               </button>
               <AnimatePresence>
