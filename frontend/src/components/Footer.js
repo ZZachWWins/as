@@ -18,8 +18,8 @@ const Footer = () => (
       <p className="text-center text-gray-600 mt-4">&copy; 2025 Activate Supplement. Fuel Your Potential. No spam—ever.</p>
       <div className="flex justify-center space-x-6 mt-4">
         <a href="mailto:hello@activatesupplement.com" className="text-red-500 hover:text-red-700">📧 Newsletter</a>
-        <a href="https://twitter.com/activate_supplement" className="text-red-500 hover:text-red-700" target="_blank" rel="noopener noreferrer">🐦 Twitter</a>
-        <a href="https://facebook.com/activate_supplement" className="text-red-500 hover:text-red-700" target="_blank" rel="noopener noreferrer">📘 Facebook</a>
+        <a href="https://twitter.com/" className="text-red-500 hover:text-red-700" target="_blank" rel="noopener noreferrer">🐦 Twitter</a>
+        <a href="https://facebook.com/" className="text-red-500 hover:text-red-700" target="_blank" rel="noopener noreferrer">📘 Facebook</a>
       </div>
     </div>
   </footer>
