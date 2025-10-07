@@ -1,4 +1,4 @@
-// src/App.js (Updated—Imports from Components, Helmet in Pages)
+// src/App.js (Enhanced with Additional Routes for New Sections if Needed)
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
