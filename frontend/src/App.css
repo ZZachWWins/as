@@ -1,11 +1,11 @@
-/* src/App.css (2025 Glow-Up: Health Greens + Fiery Contrasts, Micro-Flashes, Minimalist Punch) */
+/* src/App.css (Reverted Red/Gold Fire: No Green, Original Hero Image, +FAQ Accordion Polish) */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 .min-h-screen { min-height: 100vh; display: flex; flex-direction: column; }
 .flex { display: flex; }
 .justify-between { justify-content: space-between; }
 .items-center { align-items: center; }
 .text-center { text-align: center; }
-.font-bold { font-weight: 900; } /* Bolder for 2025 impact */
+.font-bold { font-weight: 700; }
 .mb-4 { margin-bottom: 1rem; }
 .mb-8 { margin-bottom: 2rem; }
 .py-16 { padding: 4rem 0; }
@@ -19,35 +19,14 @@
 .shadow-lg { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
 .transition { transition: all 0.3s ease; }
 
-/* Logo: Holo-Glow with Green Tint */
-.logo-image { 
-  height: 50px; 
-  width: auto; 
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)) hue-rotate(0deg); 
-  border-radius: 8px; 
-  cursor: pointer; 
-  position: relative; 
-}
-.logo-image::before { 
-  content: ''; 
-  position: absolute; 
-  inset: -2px; 
-  background: linear-gradient(45deg, #dc3545, #fd7e14, #28a745); /* Fiery to green vitality */
-  border-radius: 10px; 
-  z-index: -1; 
-  opacity: 0; 
-  transition: opacity 0.3s; 
-}
-.logo-image:hover::before { opacity: 1; }
-.logo-image:hover { 
-  transform: scale(1.05) rotate(2deg); 
-  filter: drop-shadow(0 4px 8px rgba(40,167,69,0.5)) hue-rotate(10deg); /* Green accent glow */
-}
+/* Logo Blob Enhanced */
+.logo-image { height: 50px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); border-radius: 8px; cursor: pointer; }
+.logo-image:hover { transform: scale(1.05) rotate(2deg); filter: drop-shadow(0 4px 8px rgba(220,53,69,0.3)); }
 
-/* Header: Pulsing Bar with Bold Contrasts */
+/* Header: Pulsing Gradient Bar, Holo-Nav Magic */
 header { 
-  background: linear-gradient(135deg, rgba(220,53,69,0.95), rgba(40,167,69,0.8)); /* Red to green energy shift */
-  box-shadow: 0 4px 20px rgba(40,167,69,0.3); 
+  background: linear-gradient(135deg, rgba(220,53,69,0.95), rgba(253,126,20,0.9)); 
+  box-shadow: 0 4px 20px rgba(220,53,69,0.3); 
   position: sticky; 
   top: 0; 
   z-index: 50; 
@@ -60,7 +39,7 @@ header::before {
   left: 0; 
   right: 0; 
   height: 3px; 
-  background: linear-gradient(90deg, transparent, #fff, #28a745, transparent); /* Green flash */
+  background: linear-gradient(90deg, transparent, #fff, transparent); 
   animation: pulse-bar 2s infinite; 
 }
 @keyframes pulse-bar { 
@@ -71,13 +50,12 @@ nav { padding: 1rem 1rem; }
 nav .flex { gap: 2rem; }
 nav a { 
   color: #fff; 
-  font-weight: 700; /* Bolder sans-serif vibe */
+  font-weight: 600; 
   text-decoration: none; 
   position: relative; 
   padding: 0.5rem 1rem; 
   border-radius: 0.5rem; 
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-  font-size: 1.1rem; /* Larger for impact */
 }
 nav a:hover, nav a.active { 
   background: rgba(255,255,255,0.2); 
@@ -91,7 +69,7 @@ nav a::after {
   left: 50%; 
   width: 0; 
   height: 2px; 
-  background: #28a745; /* Green underline */
+  background: #fff; 
   transition: all 0.3s ease; 
 }
 nav a:hover::after { 
@@ -99,10 +77,10 @@ nav a:hover::after {
   left: 0; 
 }
 
-/* Hero: Bold Product Image Overlay, Vibrant Green Accents */
+/* Hero Upgraded—Dynamic Energy Pulse (Reverted Original Image) */
 .hero { 
-  background: linear-gradient(rgba(220,53,69,0.9), rgba(40,167,69,0.7)), /* Red to green gradient */
-  url('https://images.unsplash.com/photo-1576092768241-dec231879fc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover; /* Swap to supplement bottle/energy vibe image */
+  background: linear-gradient(rgba(220,53,69,0.95), rgba(255,193,7,0.8)), 
+  url('https://via.placeholder.com/1920x800?text=Activate+Energy') center/cover; /* Reverted to original */
   color: #fff; 
   padding: 6rem 1rem; 
   text-align: center; 
@@ -116,37 +94,29 @@ nav a:hover::after {
   left: -100%; 
   width: 100%; 
   height: 100%; 
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), rgba(40,167,69,0.3), transparent); /* Green shimmer */
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); 
   animation: shimmer 3s infinite; 
 }
 @keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
-.hero h1 { 
-  font-size: 3.5rem; /* Larger bold hero */
-  margin-bottom: 1rem; 
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.7); 
-  font-weight: 900; 
-  letter-spacing: -0.03em; 
-  line-height: 1.1; /* Tighter for punch */
-} 
-@media (min-width: 768px) { .hero h1 { font-size: 6rem; } }
-.hero p { font-size: 1.3rem; max-width: 600px; margin: 0 auto 2rem; font-weight: 400; line-height: 1.6; }
+.hero h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); font-weight: 900; letter-spacing: -0.02em; } 
+@media (min-width: 768px) { .hero h1 { font-size: 5.5rem; } }
+.hero p { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem; font-weight: 400; line-height: 1.6; }
 
-/* Buttons: Gradient with Green Glow, Ripple + Flash */
+/* Buttons—Irresistible Lift & Glow */
 .btn { 
-  background: linear-gradient(135deg, #dc3545, #fd7e14, #28a745); /* Fiery to green */
+  background: linear-gradient(135deg, #dc3545, #fd7e14); 
   color: #fff; 
-  padding: 1.3rem 2.8rem; /* Slightly larger */
-  border-radius: 1rem; /* Softer round */
+  padding: 1.2rem 2.5rem; 
+  border-radius: 0.75rem; 
   font-weight: 700; 
   text-decoration: none; 
   display: inline-block; 
-  box-shadow: 0 6px 20px rgba(40,167,69,0.4); /* Green shadow */
+  box-shadow: 0 6px 20px rgba(220,53,69,0.4); 
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
   border: none; 
   cursor: pointer; 
   position: relative; 
   overflow: hidden; 
-  font-size: 1.1rem;
 }
 .btn::before { 
   content: ''; 
@@ -171,252 +141,135 @@ nav a:hover::after {
   left: -100%; 
   width: 100%; 
   height: 100%; 
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), rgba(40,167,69,0.2), transparent); 
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); 
   transition: left 0.5s; 
 }
 .btn:hover::after { left: 100%; }
-.btn:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(40,167,69,0.6); }
+.btn:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(220,53,69,0.6); }
 
-/* Form: Wider Beast with Green Border Glow, Subtle Spin on Submit */
+/* Form—Ultimate Conversion Machine: Glow, Pulse, Trust Signals */
 .interest-form { 
-  max-width: 550px; /* Even beefier */
+  max-width: 420px; 
   margin: 2rem auto; 
-  background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(248,255,240,0.9)); /* White to light green */
-  padding: 3.5rem; 
-  border-radius: 2.5rem; 
-  box-shadow: 0 35px 70px rgba(40,167,69,0.25), inset 0 1px 0 rgba(255,255,255,0.6); 
-  border: 2px solid rgba(40,167,69,0.2); /* Green border */
+  background: linear-gradient(145deg, #fff, #fffaf0); 
+  padding: 2.5rem; 
+  border-radius: 1.75rem; 
+  box-shadow: 0 25px 50px rgba(220,53,69,0.15); 
+  border: 1px solid rgba(220,53,69,0.08); 
   position: relative; 
-  overflow: hidden; 
 }
 .interest-form::before { 
-  content: '🔒 NSF Certified • Secure Signup'; /* Health badge trend */
+  content: '🔒 Secure & Private'; 
   position: absolute; 
-  top: -14px; 
+  top: -10px; 
   left: 50%; 
   transform: translateX(-50%); 
-  background: linear-gradient(135deg, #28a745, #20c997); /* Green gradient badge */
-  color: #fff; 
-  padding: 0.6rem 2rem; 
-  border-radius: 2rem; 
-  font-size: 0.85rem; 
-  font-weight: 600; 
-  box-shadow: 0 5px 15px rgba(40,167,69,0.4); 
-}
-.interest-form::after { 
-  content: ''; 
-  position: absolute; 
-  inset: 0; 
-  background: radial-gradient(circle at 20% 80%, rgba(40,167,69,0.15) 0%, transparent 50%), 
-              radial-gradient(circle at 80% 20%, rgba(220,53,69,0.15) 0%, transparent 50%); 
-  pointer-events: none; 
-  z-index: -1; 
-  animation: form-glow 5s ease-in-out infinite alternate; 
-}
-@keyframes form-glow { 
-  0% { opacity: 0.6; } 
-  100% { opacity: 1; } 
-}
-.form-input, select { /* Include select for quiz */
-  width: 100%; 
-  padding: 1.6rem; 
-  border: 2px solid rgba(40,167,69,0.3); /* Green tint */
-  border-radius: 1.5rem; 
-  font-size: 1.3rem; 
-  text-align: center; 
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-  background: rgba(255,255,255,0.8) backdrop-blur-sm; 
-  color: #333; 
+  background: #fff; 
+  padding: 0.25rem 1rem; 
+  border-radius: 1rem; 
+  font-size: 0.75rem; 
+  color: #6b7280; 
   font-weight: 500; 
 }
-.form-input:focus, select:focus { 
-  border-color: #28a745; 
-  transform: scale(1.05) translateY(-2px); 
-  box-shadow: 0 10px 30px rgba(40,167,69,0.35), inset 0 1px 0 rgba(255,255,255,0.8); 
+.form-input { 
+  width: 100%; 
+  padding: 1.2rem; 
+  border: 2px solid #e9ecef; 
+  border-radius: 1.25rem; 
+  font-size: 1.15rem; 
+  text-align: center; 
+  transition: all 0.4s ease; 
+  background: #fafafa; 
+}
+.form-input:focus { 
+  border-color: #dc3545; 
+  transform: scale(1.03); 
+  box-shadow: 0 0 0 4px rgba(220,53,69,0.1); 
   background: #fff; 
-  outline: none; 
 }
-.form-input::placeholder, select option { 
-  color: rgba(107,114,128,0.6); 
-  font-style: italic; 
-}
-select { appearance: none; background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e"); background-position: right 0.5rem center; background-repeat: no-repeat; background-size: 1.5em 1.5em; padding-right: 2.5rem; }
 
-/* Benefits: Spinning Icons, Green Borders */
+/* Benefits Grid—Iconic Energy Bursts */
 .benefits-grid { 
   display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Wider cards */
-  gap: 2.5rem; 
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: 2rem; 
   max-width: 1200px; 
   margin: 4rem auto; 
   padding: 0 1rem; 
 }
 .benefit-item { 
-  background: linear-gradient(135deg, #fff, #f0fff4); /* Light green fade */
-  padding: 2.5rem; 
-  border-radius: 2rem; 
+  background: linear-gradient(135deg, #fff, #fff5f5); 
+  padding: 2rem; 
+  border-radius: 1.5rem; 
   text-align: center; 
-  box-shadow: 0 15px 40px rgba(0,0,0,0.08); 
-  border: 1px solid rgba(40,167,69,0.1); 
-  transition: all 0.4s ease; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+  border: 1px solid rgba(220,53,69,0.05); 
+  transition: all 0.3s ease; 
 }
 .benefit-item:hover { 
-  transform: translateY(-8px); 
-  box-shadow: 0 20px 50px rgba(40,167,69,0.15); 
-  border-color: #28a745;
+  transform: translateY(-5px); 
+  box-shadow: 0 15px 40px rgba(220,53,69,0.1); 
 }
 .benefit-icon { 
-  font-size: 4rem; /* Larger icons */
-  margin-bottom: 1.5rem; 
+  font-size: 3rem; 
+  margin-bottom: 1rem; 
   display: block; 
-  transition: transform 0.4s; 
-  filter: drop-shadow(0 2px 4px rgba(40,167,69,0.3));
 }
-.benefit-item:hover .benefit-icon { 
-  transform: scale(1.15) rotate(10deg); /* Subtle 2025 spin */
-}
-.benefit-item h3 { font-size: 1.4rem; font-weight: 800; color: #28a745; } /* Green headlines */
 
-/* Testimonials: Flashing Quote Marks, Green Left Border */
+/* Testimonials—Social Proof Glow */
 .testimonials { 
-  background: linear-gradient(to bottom, #f8fff9, #fff); /* Subtle green tint */
-  padding: 5rem 1rem; 
+  background: linear-gradient(to bottom, #f8f9fa, #fff); 
+  padding: 4rem 1rem; 
 }
 .testimonial-grid { 
   display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-  gap: 2.5rem; 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  gap: 2rem; 
   max-width: 1200px; 
   margin: 0 auto; 
 }
 .testimonial { 
   background: #fff; 
-  padding: 2.5rem; 
-  border-radius: 2rem; 
-  box-shadow: 0 15px 40px rgba(0,0,0,0.08); 
-  border-left: 5px solid #28a745; /* Thicker green accent */
+  padding: 2rem; 
+  border-radius: 1.5rem; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+  border-left: 4px solid #dc3545; 
   font-style: italic; 
-  position: relative; 
-}
-.testimonial::before { 
-  content: '“'; 
-  font-size: 5rem; 
-  color: #28a745; 
-  position: absolute; 
-  top: -15px; 
-  left: 15px; 
-  opacity: 0.4; 
-  animation: quote-flash 3s infinite; /* Subtle flash trend */
-}
-@keyframes quote-flash { 
-  0%, 100% { opacity: 0.4; } 
-  50% { opacity: 0.8; } 
 }
 .testimonial-author { 
-  margin-top: 1.5rem; 
-  font-weight: 700; 
-  color: #28a745; 
-  font-size: 1.1rem;
-}
-
-/* Urgency: Flashing Green Badge, Sticky Potential */
-.urgency { 
-  background: linear-gradient(135deg, #dc3545, #28a745); /* Red to green */
-  color: #fff; 
-  padding: 1.5rem; 
-  text-align: center; 
-  font-weight: 700; 
-  margin: 2rem 0; 
-  box-shadow: 0 6px 20px rgba(40,167,69,0.4); 
-  animation: urgency-pulse 2s infinite; 
-  position: relative; 
-}
-.urgency::after { 
-  content: '⚡'; 
-  position: absolute; 
-  top: 50%; 
-  right: 10px; 
-  transform: translateY(-50%); 
-  font-size: 1.5rem; 
-  animation: flash 1.5s infinite; 
-}
-@keyframes flash { 
-  0%, 100% { opacity: 1; } 
-  50% { opacity: 0.3; } 
-}
-@keyframes urgency-pulse { 
-  0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(40,167,69,0.4); } 
-  50% { transform: scale(1.03); box-shadow: 0 6px 25px rgba(40,167,69,0.6); } 
-}
-
-/* Footer: Green Stellar Gradient, Flashing Links */
-footer { 
-  background: linear-gradient(135deg, rgba(15,15,30,0.9), rgba(40,167,69,0.7)), /* Dark to green */
-              radial-gradient(circle at 20% 80%, rgba(220,53,69,0.3) 0%, transparent 50%), 
-              radial-gradient(circle at 80% 20%, rgba(40,167,69,0.5) 0%, transparent 50%); 
-  color: #fff; 
-  padding: 3rem 1rem 2rem; 
-  position: relative; 
-  overflow: hidden; 
-}
-footer::before { 
-  content: ''; 
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  height: 1px; 
-  background: linear-gradient(90deg, transparent, #fff, #28a745, transparent); 
-  animation: footer-shimmer 3s infinite; 
-}
-@keyframes footer-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-footer a { 
-  color: rgba(255,255,255,0.9); 
-  text-decoration: none; 
-  position: relative; 
-  padding: 0.25rem 0.5rem; 
-  transition: all 0.3s ease; 
-  display: inline-flex; 
-  align-items: center; 
-  gap: 0.5rem; 
-  font-weight: 600;
-}
-footer a::before { 
-  content: ''; 
-  position: absolute; 
-  bottom: 0; 
-  left: 0; 
-  width: 0; 
-  height: 2px; 
-  background: linear-gradient(135deg, #dc3545, #28a745); 
-  transition: width 0.3s ease; 
-}
-footer a:hover::before { width: 100%; }
-footer a:hover { 
-  color: #fff; 
-  transform: translateY(-1px); 
-  text-shadow: 0 2px 10px rgba(40,167,69,0.6); 
-}
-footer p { 
-  text-align: center; 
-  opacity: 0.95; 
   margin-top: 1rem; 
-  font-size: 0.95rem; 
+  font-weight: 600; 
+  color: #dc3545; 
 }
 
-/* Success: Green Celebration Glow */
-.bg-gradient-to-r { background: linear-gradient(to right, #28a745, #20c997); }
+/* FAQ Styles (New: Clean Accordion) */
+.faq-section { padding: 4rem 1rem; background: linear-gradient(to bottom, #fff, #fff5f5); }
+.faq-item { background: #fff; border-radius: 1rem; margin-bottom: 1rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.faq-question { width: 100%; padding: 1.5rem; background: none; border: none; text-align: left; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+.faq-answer { padding: 0 1.5rem 1.5rem; color: #666; line-height: 1.6; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-answer.open { max-height: 200px; padding: 1.5rem; }
 
-/* Responsive: Mobile-First Minimalism */
+/* Urgency Banner */
+.urgency { 
+  background: linear-gradient(135deg, #dc3545, #fd7e14); 
+  color: #fff; 
+  padding: 1rem; 
+  text-align: center; 
+  font-weight: 600; 
+  margin: 2rem 0; 
+}
+
+/* Success Glow Enhanced */
+.bg-gradient-to-r { background: linear-gradient(to right, #dc3545, #fd7e14); }
+
+/* Responsive Mastery */
 @media (max-width: 768px) { 
   .flex { flex-direction: column; gap: 1rem; } 
   .hero { padding: 4rem 1rem; } 
-  .hero h1 { font-size: 4rem; } 
+  .hero h1 { font-size: 3.5rem; } 
   .benefits-grid { grid-template-columns: 1fr; } 
-  .interest-form { max-width: 95vw; padding: 2.5rem; } 
-  header nav .flex { flex-direction: column; gap: 0.5rem; } 
 }
 
-/* Pulse: Enhanced Green Glow */
-@keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 20px rgba(40,167,69,0.5); } 50% { opacity: 0.8; box-shadow: 0 0 40px rgba(40,167,69,0.8); } }
+/* Pulse Animation for CTAs */
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
 .pulse { animation: pulse 2s infinite; }

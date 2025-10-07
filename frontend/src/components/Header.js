@@ -1,4 +1,4 @@
-// src/components/Header.js (Refined with Subtle Glow & Waitlist Counter)
+// src/components/Header.js (Cloudinary Logo: Fiery Transparent PNG)
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -15,7 +15,7 @@ const Header = () => {
         <div className="flex justify-between items-center">
           <Link to="/">
             <motion.img 
-              src="/logo.png" 
+              src="https://res.cloudinary.com/deheojfkt/image/upload/Untitled_512_x_512_px_sdrcsv.png" 
               alt="Activate" 
               className="logo-image" 
               whileHover={{ scale: 1.05, rotate: 2 }} 

@@ -1,4 +1,4 @@
-// src/components/Home.js (Ultimate 2025 Flow: Timer Urgency + UGC Proof + Personalized CTA)
+// src/components/Home.js (Expanded: +FAQ Accordion for Trust/Engagement)
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
@@ -7,7 +7,8 @@ import Benefits from './Benefits';
 import Testimonials from './Testimonials';
 import InterestForm from './InterestForm';
 import UrgencyBanner from './UrgencyBanner';
-import CountdownTimer from './CountdownTimer'; // New: Live launch countdown
+import CountdownTimer from './CountdownTimer';
+import FAQ from './FAQ'; // New: Trust-building FAQ section
 
 const Home = () => (
   <>
@@ -17,9 +18,10 @@ const Home = () => (
     </Helmet>
     <Hero />
     <UrgencyBanner />
-    <CountdownTimer /> {/* New: Ticking FOMO – edits to Nov 1 launch */}
+    <CountdownTimer />
     <Benefits />
     <Testimonials />
+    <FAQ /> {/* New: Expandable FAQ for deeper engagement */}
     <motion.section 
       initial={{ opacity: 0 }} 
       whileInView={{ opacity: 1 }} 
