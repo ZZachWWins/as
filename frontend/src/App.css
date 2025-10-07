@@ -321,3 +321,14 @@ nav a:hover::after {
 
 /* FAQ Modern Tweaks (Already Integrated Above) */
 .faq-section { /* If needed, but inline styles cover */ }
+
+/* Hero: Girl Sit-Up BG Reinstated */
+.hero { 
+  background: linear-gradient(rgba(220,53,69,0.95), rgba(255,193,7,0.8)), 
+  url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; 
+  color: #fff; 
+  padding: 6rem 1rem; 
+  text-align: center; 
+  position: relative; 
+  overflow: hidden; 
+}

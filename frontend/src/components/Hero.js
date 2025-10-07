@@ -1,4 +1,4 @@
-// src/components/Hero.js (Modern Secondary CTA: Outlined Button Glow)
+// src/components/Hero.js (Full: Girl Sit-Up BG + Modern Buttons)
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
