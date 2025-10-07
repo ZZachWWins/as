@@ -359,3 +359,26 @@ nav a:hover::after {
 .faq-card:hover { 
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Dramatic depth */
 }
+
+/* FAQ Testimonials Mirror: Grid & Card Styles */
+.faq-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  gap: 2rem; 
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
+.faq-card { 
+  background: #fff; 
+  border-radius: 1.5rem; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+  overflow: hidden; /* For smooth expand */
+  transition: box-shadow 0.3s ease; /* Subtle hover depth */
+}
+.faq-card:hover { 
+  box-shadow: 0 15px 40px rgba(220,53,69,0.1); /* Red-tinted lift like testimonials */
+}
+.testimonials-faq { /* Section BG match */
+  background: linear-gradient(to bottom, #f8f9fa, #fff); 
+  padding: 4rem 1rem; 
+}
