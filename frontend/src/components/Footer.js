@@ -1,4 +1,4 @@
-// src/components/Footer.js (Boosted with Social Links & Trust Badges)
+// src/components/Footer.js (Fixed ESLint a11y: Valid hrefs for Privacy/Terms/Social)
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -11,15 +11,15 @@ const Footer = () => (
           <Link to="/shop" className="transition hover:text-yellow-500 font-medium">Shop</Link>
         </div>
         <div className="flex space-x-4 text-sm text-gray-600">
-          <a href="#" className="hover:text-red-500">Privacy</a>
-          <a href="#" className="hover:text-red-500">Terms</a>
+          <a href="/privacy-policy" className="hover:text-red-500">Privacy</a>
+          <a href="/terms-of-service" className="hover:text-red-500">Terms</a>
         </div>
       </div>
       <p className="text-center text-gray-600 mt-4">&copy; 2025 Activate Supplement. Fuel Your Potential. No spam—ever.</p>
       <div className="flex justify-center space-x-6 mt-4">
-        <a href="#" className="text-red-500 hover:text-red-700">📧 Newsletter</a>
-        <a href="#" className="text-red-500 hover:text-red-700">🐦 Twitter</a>
-        <a href="#" className="text-red-500 hover:text-red-700">📘 Facebook</a>
+        <a href="mailto:hello@activatesupplement.com" className="text-red-500 hover:text-red-700">📧 Newsletter</a>
+        <a href="https://twitter.com/activate_supplement" className="text-red-500 hover:text-red-700" target="_blank" rel="noopener noreferrer">🐦 Twitter</a>
+        <a href="https://facebook.com/activate_supplement" className="text-red-500 hover:text-red-700" target="_blank" rel="noopener noreferrer">📘 Facebook</a>
       </div>
     </div>
   </footer>
