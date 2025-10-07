@@ -1,4 +1,4 @@
-/* src/App.css (Elevated with Premium Vibes—Subtle Gradients, Glows, and Micro-Interactions for Irresistible Flow) */
+/* src/App.css (Badass Overhaul: Holographic Header, Stellar Footer, Neon Form Beast) */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 .min-h-screen { min-height: 100vh; display: flex; flex-direction: column; }
 .flex { display: flex; }
@@ -19,11 +19,86 @@
 .shadow-lg { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
 .transition { transition: all 0.3s ease; }
 
-/* Logo Blob Enhanced */
-.logo-image { height: 50px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); border-radius: 8px; cursor: pointer; }
-.logo-image:hover { transform: scale(1.05) rotate(2deg); filter: drop-shadow(0 4px 8px rgba(220,53,69,0.3)); }
+/* Logo Blob: Now with Holo-Glow */
+.logo-image { 
+  height: 50px; 
+  width: auto; 
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)) hue-rotate(0deg); 
+  border-radius: 8px; 
+  cursor: pointer; 
+  position: relative; 
+}
+.logo-image::before { 
+  content: ''; 
+  position: absolute; 
+  inset: -2px; 
+  background: linear-gradient(45deg, #dc3545, #fd7e14, #dc3545); 
+  border-radius: 10px; 
+  z-index: -1; 
+  opacity: 0; 
+  transition: opacity 0.3s; 
+}
+.logo-image:hover::before { opacity: 1; }
+.logo-image:hover { 
+  transform: scale(1.05) rotate(2deg); 
+  filter: drop-shadow(0 4px 8px rgba(220,53,69,0.5)) hue-rotate(10deg); 
+}
 
-/* Hero Upgraded—Dynamic Energy Pulse */
+/* Header: Pulsing Gradient Bar, Holo-Nav Magic */
+header { 
+  background: linear-gradient(135deg, rgba(220,53,69,0.95), rgba(253,126,20,0.9)); 
+  box-shadow: 0 4px 20px rgba(220,53,69,0.3); 
+  position: sticky; 
+  top: 0; 
+  z-index: 50; 
+  overflow: hidden; 
+}
+header::before { 
+  content: ''; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  height: 3px; 
+  background: linear-gradient(90deg, transparent, #fff, transparent); 
+  animation: pulse-bar 2s infinite; 
+}
+@keyframes pulse-bar { 
+  0%, 100% { opacity: 0.5; transform: scaleX(0); } 
+  50% { opacity: 1; transform: scaleX(1); } 
+}
+nav { padding: 1rem 1rem; }
+nav .flex { gap: 2rem; }
+nav a { 
+  color: #fff; 
+  font-weight: 600; 
+  text-decoration: none; 
+  position: relative; 
+  padding: 0.5rem 1rem; 
+  border-radius: 0.5rem; 
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+}
+nav a:hover, nav a.active { 
+  background: rgba(255,255,255,0.2); 
+  transform: translateY(-2px); 
+  box-shadow: 0 5px 15px rgba(255,255,255,0.3); 
+}
+nav a::after { 
+  content: ''; 
+  position: absolute; 
+  bottom: 0; 
+  left: 50%; 
+  width: 0; 
+  height: 2px; 
+  background: #fff; 
+  transition: all 0.3s ease; 
+}
+nav a:hover::after { 
+  width: 100%; 
+  left: 0; 
+}
+
+/* Hero Upgraded—Dynamic Energy Pulse (Unchanged for Focus) */
 .hero { 
   background: linear-gradient(rgba(220,53,69,0.95), rgba(255,193,7,0.8)), 
   url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; 
@@ -48,7 +123,7 @@
 @media (min-width: 768px) { .hero h1 { font-size: 5.5rem; } }
 .hero p { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem; font-weight: 400; line-height: 1.6; }
 
-/* Buttons—Irresistible Lift & Glow */
+/* Buttons—Irresistible Lift & Glow (Enhanced Ripple) */
 .btn { 
   background: linear-gradient(135deg, #dc3545, #fd7e14); 
   color: #fff; 
@@ -67,6 +142,22 @@
 .btn::before { 
   content: ''; 
   position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  width: 0; 
+  height: 0; 
+  background: rgba(255,255,255,0.3); 
+  border-radius: 50%; 
+  transform: translate(-50%, -50%); 
+  transition: width 0.6s, height 0.6s; 
+}
+.btn:active::before { 
+  width: 300px; 
+  height: 300px; 
+}
+.btn::after { 
+  content: ''; 
+  position: absolute; 
   top: 0; 
   left: -100%; 
   width: 100%; 
@@ -74,51 +165,74 @@
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); 
   transition: left 0.5s; 
 }
-.btn:hover::before { left: 100%; }
+.btn:hover::after { left: 100%; }
 .btn:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(220,53,69,0.6); }
 
-/* Form—Ultimate Conversion Machine: Glow, Pulse, Trust Signals */
+/* Form: Neon Beast Mode—Wider, Glowier, Pulsing Inputs */
 .interest-form { 
-  max-width: 420px; 
+  max-width: 500px; /* Beefed up from 420px */ 
   margin: 2rem auto; 
-  background: linear-gradient(145deg, #fff, #fffaf0); 
-  padding: 2.5rem; 
-  border-radius: 1.75rem; 
-  box-shadow: 0 25px 50px rgba(220,53,69,0.15); 
-  border: 1px solid rgba(220,53,69,0.08); 
+  background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,245,240,0.8) backdrop-blur-md); 
+  padding: 3rem; /* More breathing room */ 
+  border-radius: 2rem; 
+  box-shadow: 0 30px 60px rgba(220,53,69,0.2), inset 0 1px 0 rgba(255,255,255,0.5); 
+  border: 1px solid rgba(220,53,69,0.15); 
   position: relative; 
+  overflow: hidden; 
 }
 .interest-form::before { 
-  content: '🔒 Secure & Private'; 
+  content: '🔒 Secure & Private • Powered by Netlify'; 
   position: absolute; 
-  top: -10px; 
+  top: -12px; 
   left: 50%; 
   transform: translateX(-50%); 
-  background: #fff; 
-  padding: 0.25rem 1rem; 
-  border-radius: 1rem; 
-  font-size: 0.75rem; 
-  color: #6b7280; 
-  font-weight: 500; 
+  background: linear-gradient(135deg, #dc3545, #fd7e14); 
+  color: #fff; 
+  padding: 0.5rem 1.5rem; 
+  border-radius: 1.5rem; 
+  font-size: 0.8rem; 
+  font-weight: 600; 
+  box-shadow: 0 4px 12px rgba(220,53,69,0.3); 
+}
+.interest-form::after { 
+  content: ''; 
+  position: absolute; 
+  inset: 0; 
+  background: radial-gradient(circle at 20% 80%, rgba(220,53,69,0.1) 0%, transparent 50%), 
+              radial-gradient(circle at 80% 20%, rgba(253,126,20,0.1) 0%, transparent 50%); 
+  pointer-events: none; 
+  z-index: -1; 
+  animation: form-glow 4s ease-in-out infinite alternate; 
+}
+@keyframes form-glow { 
+  0% { opacity: 0.5; } 
+  100% { opacity: 1; } 
 }
 .form-input { 
   width: 100%; 
-  padding: 1.2rem; 
-  border: 2px solid #e9ecef; 
-  border-radius: 1.25rem; 
-  font-size: 1.15rem; 
+  padding: 1.5rem; /* Taller for epic feel */ 
+  border: 2px solid rgba(220,53,69,0.2); 
+  border-radius: 1.5rem; 
+  font-size: 1.25rem; /* Bigger text */ 
   text-align: center; 
-  transition: all 0.4s ease; 
-  background: #fafafa; 
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+  background: rgba(255,255,255,0.7) backdrop-blur-sm; 
+  color: #333; 
+  font-weight: 500; 
 }
 .form-input:focus { 
   border-color: #dc3545; 
-  transform: scale(1.03); 
-  box-shadow: 0 0 0 4px rgba(220,53,69,0.1); 
+  transform: scale(1.05) translateY(-2px); /* Float effect */ 
+  box-shadow: 0 8px 25px rgba(220,53,69,0.3), inset 0 1px 0 rgba(255,255,255,0.8); 
   background: #fff; 
+  outline: none; 
+}
+.form-input::placeholder { 
+  color: rgba(107,114,128,0.6); 
+  font-style: italic; 
 }
 
-/* Benefits Grid—Iconic Energy Bursts */
+/* Benefits Grid—Iconic Energy Bursts (Unchanged) */
 .benefits-grid { 
   display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
@@ -144,9 +258,13 @@
   font-size: 3rem; 
   margin-bottom: 1rem; 
   display: block; 
+  transition: transform 0.3s; 
+}
+.benefit-item:hover .benefit-icon { 
+  transform: scale(1.1) rotate(5deg); 
 }
 
-/* Testimonials—Social Proof Glow */
+/* Testimonials—Social Proof Glow (Unchanged) */
 .testimonials { 
   background: linear-gradient(to bottom, #f8f9fa, #fff); 
   padding: 4rem 1rem; 
@@ -165,6 +283,16 @@
   box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
   border-left: 4px solid #dc3545; 
   font-style: italic; 
+  position: relative; 
+}
+.testimonial::before { 
+  content: '“'; 
+  font-size: 4rem; 
+  color: #dc3545; 
+  position: absolute; 
+  top: -10px; 
+  left: 10px; 
+  opacity: 0.3; 
 }
 .testimonial-author { 
   margin-top: 1rem; 
@@ -172,17 +300,77 @@
   color: #dc3545; 
 }
 
-/* Urgency Banner */
+/* Footer: Stellar Gradient, Ripple Links, Icon Pops */
+footer { 
+  background: linear-gradient(135deg, rgba(15,15,30,0.9), rgba(50,50,80,0.8)), 
+              radial-gradient(circle at 20% 80%, rgba(220,53,69,0.3) 0%, transparent 50%), 
+              radial-gradient(circle at 80% 20%, rgba(253,126,20,0.3) 0%, transparent 50%); 
+  color: #fff; 
+  padding: 3rem 1rem 2rem; 
+  position: relative; 
+  overflow: hidden; 
+}
+footer::before { 
+  content: ''; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  height: 1px; 
+  background: linear-gradient(90deg, transparent, #fff, transparent); 
+  animation: footer-shimmer 3s infinite; 
+}
+@keyframes footer-shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+footer a { 
+  color: rgba(255,255,255,0.8); 
+  text-decoration: none; 
+  position: relative; 
+  padding: 0.25rem 0.5rem; 
+  transition: all 0.3s ease; 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 0.5rem; 
+}
+footer a::before { 
+  content: ''; 
+  position: absolute; 
+  bottom: 0; 
+  left: 0; 
+  width: 0; 
+  height: 2px; 
+  background: linear-gradient(135deg, #dc3545, #fd7e14); 
+  transition: width 0.3s ease; 
+}
+footer a:hover::before { width: 100%; }
+footer a:hover { 
+  color: #fff; 
+  transform: translateY(-1px); 
+  text-shadow: 0 2px 10px rgba(220,53,69,0.5); 
+}
+footer p { 
+  text-align: center; 
+  opacity: 0.9; 
+  margin-top: 1rem; 
+  font-size: 0.9rem; 
+}
+
+/* Urgency Banner (Enhanced Pulse) */
 .urgency { 
   background: linear-gradient(135deg, #dc3545, #fd7e14); 
   color: #fff; 
-  padding: 1rem; 
+  padding: 1.5rem; 
   text-align: center; 
-  font-weight: 600; 
+  font-weight: 700; 
   margin: 2rem 0; 
+  box-shadow: 0 4px 15px rgba(220,53,69,0.4); 
+  animation: urgency-pulse 2s infinite; 
+}
+@keyframes urgency-pulse { 
+  0%, 100% { transform: scale(1); } 
+  50% { transform: scale(1.02); } 
 }
 
-/* Success Glow Enhanced */
+/* Success Glow Enhanced (Neon Vibes) */
 .bg-gradient-to-r { background: linear-gradient(to right, #dc3545, #fd7e14); }
 
 /* Responsive Mastery */
@@ -191,8 +379,10 @@
   .hero { padding: 4rem 1rem; } 
   .hero h1 { font-size: 3.5rem; } 
   .benefits-grid { grid-template-columns: 1fr; } 
+  .interest-form { max-width: 90vw; padding: 2rem; } 
+  header nav .flex { flex-direction: column; gap: 0.5rem; } 
 }
 
 /* Pulse Animation for CTAs */
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+@keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 20px rgba(220,53,69,0.5); } 50% { opacity: 0.8; box-shadow: 0 0 40px rgba(220,53,69,0.8); } }
 .pulse { animation: pulse 2s infinite; }
