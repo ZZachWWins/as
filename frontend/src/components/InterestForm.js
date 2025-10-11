@@ -74,7 +74,7 @@ const InterestForm = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               type="submit"
-              className="w-full btn text-lg"
+              className="w-full cta-btn text-lg" // Changed from btn to cta-btn
             >
               🚀 Lock in 20% + Tailored Access
             </motion.button>
@@ -105,7 +105,7 @@ const InterestForm = () => {
         {status === 'error' && (
           <motion.div key="error" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-center space-y-4">
             <p className="text-red-500 font-semibold">Whoops—double-check that email and ignite again!</p>
-            <button onClick={() => setStatus('idle')} className="btn">Retry Launch</button>
+            <button onClick={() => setStatus('idle')} className="cta-btn">Retry Launch</button> {/* Changed from btn to cta-btn */}
           </motion.div>
         )}
       </AnimatePresence>

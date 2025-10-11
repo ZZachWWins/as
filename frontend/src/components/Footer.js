@@ -97,7 +97,7 @@ const Footer = () => {
                 type="submit" 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="btn px-6 py-3 font-semibold transition-all duration-300 shadow-lg flex items-center justify-center gap-1 text-white text-sm"
+                className="cta-btn px-6 py-3 font-semibold transition-all duration-300 shadow-lg flex items-center justify-center gap-1 text-white text-sm" // Changed from btn to cta-btn
               >
                 Join <FiArrowRight className="text-xs" />
               </motion.button>
