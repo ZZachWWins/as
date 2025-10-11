@@ -1,4 +1,4 @@
-// src/components/Hero.js (Professional Polish: Apple-Inspired, Persistent Particles, Logo Overlay, Full Visibility with CTA Buttons)
+// src/components/Hero.js (Professional Polish: Apple-Inspired, Persistent Particles, Logo Overlay, Centered CTA with Gradient Text)
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -111,7 +111,7 @@ const Hero = () => {
              transform: `translateY(${window.scrollY * 0.2}px)` // Slower parallax
            }} 
       />
-      <div className="relative z-10 flex items-start justify-center h-screen pt-64 pb-16 px-4"> {/* Increased pt-64 to 16rem */}
+      <div className="relative z-10 flex items-center justify-center h-screen pt-64 pb-16 px-4"> {/* Increased pt-64 to 16rem */}
         <div className="text-center max-w-4xl">
           {/* Logo Overlay */}
           <motion.img
@@ -126,9 +126,22 @@ const Hero = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-100 leading-tight mb-6"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
             style={{ 
-              textShadow: '0 2px 6px rgba(0,0,0,0.5)' // Stronger shadow for readability
+              color: 'white', // Explicitly set white text
+              textShadow: `
+                -1px -1px 0 #ff0000,
+                1px -1px 0 #ffaa00,
+                -1px 1px 0 #ffaa00,
+                1px 1px 0 #00aaff,
+                -2px -2px 0 #ff0000,
+                2px -2px 0 #ffaa00,
+                -2px 2px 0 #ffaa00,
+                2px 2px 0 #00aaff,
+                -3px -3px 0 #ff0000,
+                3px -3px 0 #ffaa00,
+                -3px 3px 0 #ffaa00,
+                3px 3px 0 #00aaff` // Gradient outline effect
             }}
           >
             Unlock Instant Energy
@@ -137,7 +150,19 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed"
+            style={{ 
+              color: 'white', // Explicitly set white text
+              textShadow: `
+                -1px -1px 0 #ff0000,
+                1px -1px 0 #ffaa00,
+                -1px 1px 0 #ffaa00,
+                1px 1px 0 #00aaff,
+                -2px -2px 0 #ff0000,
+                2px -2px 0 #ffaa00,
+                -2px 2px 0 #ffaa00,
+                2px 2px 0 #00aaff` // Gradient outline effect
+            }}
           >
             Science-backed boosts for breath, focus, and flow. Join 5,000+ early adopters for exclusive pre-launch access.
           </motion.p>
@@ -145,7 +170,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center" // Increased gap and centered
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link 
