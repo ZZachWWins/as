@@ -39,7 +39,7 @@ const FAQ = () => {
         >
           Frequently Asked Questions
         </motion.h2>
-        <div className="faq-grid"> {/* Mirror testimonial-grid */}
+        <div className="faq-grid stagger-children" whileInView={{ className: 'stagger-children animate' }} viewport={{ once: true }}> {/* Mirror testimonial-grid */}
           {faqs.map((faq, index) => (
             <motion.div 
               key={index}

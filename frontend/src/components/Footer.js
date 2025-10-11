@@ -1,4 +1,4 @@
-// src/components/Footer.js (Xeriweb Refined: Deep Gradient, Clean Columns, Inline Newsletter)
+// src/components/Footer.js (Xeriweb Refined: Deep Gradient, Clean Columns, Inline Newsletter + Hover Gradient Underline)
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';

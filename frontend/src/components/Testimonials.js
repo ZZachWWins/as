@@ -1,4 +1,4 @@
-// src/components/Testimonials.js (New: Credibility Booster)
+// src/components/Testimonials.js (New: Credibility Booster + Stagger)
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -27,13 +27,14 @@ const Testimonials = () => (
       >
         What Early Testers Are Saying
       </motion.h2>
-      <div className="testimonial-grid">
+      <div className="testimonial-grid stagger-children" whileInView={{ className: 'stagger-children animate' }} viewport={{ once: true }}>
         {testimonials.map((testimonial, index) => (
           <motion.div 
             key={index}
             initial={{ opacity: 0, x: -20 }} 
             whileInView={{ opacity: 1, x: 0 }} 
             transition={{ delay: index * 0.1 }}
+            whileHover={{ scale: 1.02 }}
             className="testimonial"
           >
             <p className="text-gray-700 mb-4">"{testimonial.quote}"</p>

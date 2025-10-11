@@ -1,4 +1,4 @@
-// src/components/Home.js (Expanded: +FAQ Accordion for Trust/Engagement)
+// src/components/Home.js (Expanded: +FAQ Accordion for Trust/Engagement + Staggered)
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
@@ -19,9 +19,21 @@ const Home = () => (
     <Hero />
     <UrgencyBanner />
     <CountdownTimer />
-    <Benefits />
-    <Testimonials />
-    <FAQ /> {/* New: Expandable FAQ for deeper engagement */}
+    <motion.section id="benefits" className="py-16 bg-white stagger-children" whileInView={{ className: 'stagger-children animate' }} viewport={{ once: true }}>
+      <div className="max-w-7xl mx-auto px-4">
+        <Benefits />
+      </div>
+    </motion.section>
+    <motion.section className="py-16 bg-gray-50 stagger-children" whileInView={{ className: 'stagger-children animate' }} viewport={{ once: true }}>
+      <div className="max-w-7xl mx-auto px-4">
+        <Testimonials />
+      </div>
+    </motion.section>
+    <motion.section className="py-16 stagger-children" whileInView={{ className: 'stagger-children animate' }} viewport={{ once: true }}>
+      <div className="max-w-7xl mx-auto px-4">
+        <FAQ />
+      </div>
+    </motion.section>
     <motion.section 
       initial={{ opacity: 0 }} 
       whileInView={{ opacity: 1 }} 

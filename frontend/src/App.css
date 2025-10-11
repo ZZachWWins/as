@@ -1,4 +1,4 @@
-/* src/App.css (Reverted Red/Gold Fire: No Green, Original Hero Image, +FAQ Accordion Polish) */
+/* src/App.css (Reverted Red/Gold Fire: No Green, Original Hero Image, +FAQ Accordion Polish + Parallax & Particles + Hover Gradient Underlines) */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 .min-h-screen { min-height: 100vh; display: flex; flex-direction: column; }
 .flex { display: flex; }
@@ -23,7 +23,7 @@
 .logo-image { height: 50px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); border-radius: 8px; cursor: pointer; }
 .logo-image:hover { transform: scale(1.05) rotate(2deg); filter: drop-shadow(0 4px 8px rgba(220,53,69,0.3)); }
 
-/* Header: Pulsing Gradient Bar, Holo-Nav Magic */
+/* Header: Pulsing Gradient Bar, Holo-Nav Magic + Multi-Color Gradient Underline on Hover */
 header { 
   background: linear-gradient(135deg, rgba(220,53,69,0.95), rgba(253,126,20,0.9)); 
   box-shadow: 0 4px 20px rgba(220,53,69,0.3); 
@@ -67,74 +67,52 @@ nav a::after {
   position: absolute; 
   bottom: 0; 
   left: 50%; 
-  width: 0; 
+  width: 0; /* Starts hidden */
   height: 2px; 
-  background: #fff; 
+  background: linear-gradient(to right, #dc3545, #fd7e14, #ffc107, #17a2b8, #dc3545); /* Multi-color gradient like screenshot */
+  border-radius: 1px;
   transition: all 0.3s ease; 
 }
-nav a:hover::after { 
+nav a:hover::after, nav a.active::after { 
   width: 100%; 
   left: 0; 
 }
 
 /* Hero Upgraded—Dynamic Energy Pulse (Reverted Original Image) */
 .hero { 
-  background: linear-gradient(rgba(220,53,69,0.95), rgba(255,193,7,0.8)), 
-  url('https://via.placeholder.com/1920x800?text=Activate+Energy') center/cover; /* Reverted to original */
-  color: #fff; 
-  padding: 6rem 1rem; 
-  text-align: center; 
   position: relative; 
+  min-height: 100vh; 
+  display: flex; 
+  align-items: center; 
+  background: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover fixed; 
   overflow: hidden; 
 }
-.hero::before { 
-  content: ''; 
-  position: absolute; 
-  top: 0; 
-  left: -100%; 
-  width: 100%; 
-  height: 100%; 
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); 
-  animation: shimmer 3s infinite; 
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(220,38,127,0.7) 0%, rgba(255,193,7,0.6) 100%);
+  z-index: 1;
 }
-@keyframes shimmer { 0% { left: -100%; } 100% { left: 100%; } }
-.hero h1 { font-size: 3rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.7); font-weight: 900; letter-spacing: -0.02em; } 
-@media (min-width: 768px) { .hero h1 { font-size: 5.5rem; } }
-.hero p { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem; font-weight: 400; line-height: 1.6; }
+.hero > * { position: relative; z-index: 2; }
 
-/* Buttons—Irresistible Lift & Glow */
+/* Buttons: Fiery Gradients with Glow */
 .btn { 
-  background: linear-gradient(135deg, #dc3545, #fd7e14); 
-  color: #fff; 
-  padding: 1.2rem 2.5rem; 
-  border-radius: 0.75rem; 
-  font-weight: 700; 
-  text-decoration: none; 
   display: inline-block; 
-  box-shadow: 0 6px 20px rgba(220,53,69,0.4); 
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-  border: none; 
-  cursor: pointer; 
+  padding: 1rem 2rem; 
+  background: linear-gradient(135deg, #dc3545, #fd7e14); 
+  color: white; 
+  text-decoration: none; 
+  border-radius: 50px; 
+  font-weight: 600; 
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+  box-shadow: 0 4px 15px rgba(220,53,69,0.4); 
+  transition: all 0.3s ease; 
   position: relative; 
   overflow: hidden; 
 }
 .btn::before { 
-  content: ''; 
-  position: absolute; 
-  top: 50%; 
-  left: 50%; 
-  width: 0; 
-  height: 0; 
-  background: rgba(255,255,255,0.3); 
-  border-radius: 50%; 
-  transform: translate(-50%, -50%); 
-  transition: width 0.6s, height 0.6s; 
-}
-.btn:active::before { 
-  width: 300px; 
-  height: 300px; 
-}
-.btn::after { 
   content: ''; 
   position: absolute; 
   top: 0; 
@@ -144,228 +122,101 @@ nav a:hover::after {
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); 
   transition: left 0.5s; 
 }
-.btn:hover::after { left: 100%; }
-.btn:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(220,53,69,0.6); }
+.btn:hover::before { left: 100%; }
+.btn:hover { 
+  transform: translateY(-3px) scale(1.05); 
+  box-shadow: 0 8px 25px rgba(220,53,69,0.6); 
+}
+.btn-outline { 
+  border: 2px solid #dc3545; 
+  background: transparent; 
+  color: #dc3545; 
+}
+.btn-outline:hover { 
+  background: linear-gradient(135deg, #dc3545, #fd7e14); 
+  color: white; 
+  border-color: transparent; 
+}
 
-/* Form—Ultimate Conversion Machine: Glow, Pulse, Trust Signals */
-.interest-form { 
-  max-width: 420px; 
-  margin: 2rem auto; 
-  background: linear-gradient(145deg, #fff, #fffaf0); 
-  padding: 2.5rem; 
-  border-radius: 1.75rem; 
-  box-shadow: 0 25px 50px rgba(220,53,69,0.15); 
-  border: 1px solid rgba(220,53,69,0.08); 
-  position: relative; 
-}
-.interest-form::before { 
-  content: '🔒 Secure & Private'; 
-  position: absolute; 
-  top: -10px; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  background: #fff; 
-  padding: 0.25rem 1rem; 
-  border-radius: 1rem; 
-  font-size: 0.75rem; 
-  color: #6b7280; 
-  font-weight: 500; 
-}
-.form-input { 
-  width: 100%; 
-  padding: 1.2rem; 
-  border: 2px solid #e9ecef; 
-  border-radius: 1.25rem; 
-  font-size: 1.15rem; 
+/* Urgency Banner: Sliding Fire */
+.urgency { 
+  background: linear-gradient(90deg, #dc3545, #fd7e14); 
+  color: white; 
   text-align: center; 
-  transition: all 0.4s ease; 
-  background: #fafafa; 
+  padding: 1rem; 
+  font-weight: bold; 
+  animation: slideIn 0.5s ease-out; 
 }
-.form-input:focus { 
-  border-color: #dc3545; 
-  transform: scale(1.03); 
-  box-shadow: 0 0 0 4px rgba(220,53,69,0.1); 
-  background: #fff; 
+@keyframes slideIn { 
+  from { transform: translateX(-100%); } 
+  to { transform: translateX(0); } 
 }
 
-/* Benefits Grid—Iconic Energy Bursts */
+/* Benefits Grid: Icon Glow */
 .benefits-grid { 
   display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
   gap: 2rem; 
-  max-width: 1200px; 
-  margin: 4rem auto; 
-  padding: 0 1rem; 
+  margin-top: 3rem; 
 }
 .benefit-item { 
-  background: linear-gradient(135deg, #fff, #fff5f5); 
-  padding: 2rem; 
-  border-radius: 1.5rem; 
   text-align: center; 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-  border: 1px solid rgba(220,53,69,0.05); 
+  padding: 2rem; 
+  background: white; 
+  border-radius: 1rem; 
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
   transition: all 0.3s ease; 
 }
 .benefit-item:hover { 
   transform: translateY(-5px); 
-  box-shadow: 0 15px 40px rgba(220,53,69,0.1); 
+  box-shadow: 0 10px 30px rgba(220,53,69,0.2); 
 }
 .benefit-icon { 
   font-size: 3rem; 
-  margin-bottom: 1rem; 
   display: block; 
+  margin-bottom: 1rem; 
+  filter: drop-shadow(0 2px 4px rgba(220,53,69,0.3)); 
 }
 
-/* Testimonials—Social Proof Glow */
-.testimonials { 
-  background: linear-gradient(to bottom, #f8f9fa, #fff); 
-  padding: 4rem 1rem; 
-}
+/* Testimonials: Staggered Cards with Quote Marks */
 .testimonial-grid { 
   display: grid; 
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
   gap: 2rem; 
-  max-width: 1200px; 
-  margin: 0 auto; 
+  margin-top: 3rem; 
 }
 .testimonial { 
-  background: #fff; 
+  background: white; 
   padding: 2rem; 
-  border-radius: 1.5rem; 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-  border-left: 4px solid #dc3545; 
-  font-style: italic; 
-}
-.testimonial-author { 
-  margin-top: 1rem; 
-  font-weight: 600; 
-  color: #dc3545; 
-}
-
-/* FAQ Styles (New: Clean Accordion) */
-.faq-section { padding: 4rem 1rem; background: linear-gradient(to bottom, #fff, #fff5f5); }
-.faq-item { background: #fff; border-radius: 1rem; margin-bottom: 1rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-.faq-question { width: 100%; padding: 1.5rem; background: none; border: none; text-align: left; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-.faq-answer { padding: 0 1.5rem 1.5rem; color: #666; line-height: 1.6; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-.faq-answer.open { max-height: 200px; padding: 1.5rem; }
-
-/* Urgency Banner */
-.urgency { 
-  background: linear-gradient(135deg, #dc3545, #fd7e14); 
-  color: #fff; 
-  padding: 1rem; 
-  text-align: center; 
-  font-weight: 600; 
-  margin: 2rem 0; 
-}
-
-/* Success Glow Enhanced */
-.bg-gradient-to-r { background: linear-gradient(to right, #dc3545, #fd7e14); }
-
-/* Responsive Mastery */
-@media (max-width: 768px) { 
-  .flex { flex-direction: column; gap: 1rem; } 
-  .hero { padding: 4rem 1rem; } 
-  .hero h1 { font-size: 3.5rem; } 
-  .benefits-grid { grid-template-columns: 1fr; } 
-}
-
-/* Pulse Animation for CTAs */
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
-.pulse { animation: pulse 2s infinite; }
-
-/* src/App.css (Added: Outline Buttons, Footer Cards, FAQ Modern Polish) */
-/* ... (keep all previous styles from last full App.css) ... */
-
-/* New: Outline Button for Hero */
-.btn-outline { 
-  color: #fff; 
-  padding: 1rem 2rem; 
-  border: 2px solid rgba(255,255,255,0.5); 
-  border-radius: 0.75rem; 
-  font-weight: 700; 
-  text-decoration: none; 
-  display: inline-block; 
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-  backdrop-filter: blur(10px); 
-}
-.btn-outline:hover { 
-  background: rgba(255,255,255,0.2); 
-  border-color: #fff; 
-  transform: translateY(-2px); 
-  box-shadow: 0 6px 20px rgba(220,53,69,0.3); 
-}
-
-/* New: Footer Button Cards */
-.footer-btn { 
-  background: #fff; 
-  color: #dc3545; 
-  padding: 0.75rem 1.5rem; 
   border-radius: 1rem; 
-  font-weight: 600; 
-  text-decoration: none; 
-  display: flex; 
-  align-items: center; 
-  gap: 0.5rem; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
+  position: relative; 
   transition: all 0.3s ease; 
 }
-.footer-btn:hover { 
-  transform: translateY(-2px); 
-  box-shadow: 0 6px 20px rgba(220,53,69,0.2); 
+.testimonial::before { 
+  content: '"'; 
+  font-size: 6rem; 
   color: #fd7e14; 
+  position: absolute; 
+  top: -10px; 
+  left: 20px; 
+  font-family: serif; 
+}
+.testimonial:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 10px 30px rgba(220,53,69,0.2); 
+}
+.testimonial-author { 
+  font-weight: 600; 
+  color: #dc3545; 
+  margin-top: 1rem; 
 }
 
-/* Countdown Responsive Tweak (in .urgency) */
-.urgency .flex { flex-wrap: wrap; justify-content: center; } /* Ensures mobile wrap */
-
-/* FAQ Modern Tweaks (Already Integrated Above) */
-.faq-section { /* If needed, but inline styles cover */ }
-
-/* Hero: Girl Sit-Up BG Reinstated */
-.hero { 
-  background: linear-gradient(rgba(220,53,69,0.95), rgba(255,193,7,0.8)), 
-  url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center/cover; 
-  color: #fff; 
-  padding: 6rem 1rem; 
-  text-align: center; 
-  position: relative; 
-  overflow: hidden; 
-}
-
-/* Fancy FAQ Additions: Blob Animations & Group Hovers */
-@keyframes blob {
-  0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(30px, -50px) scale(1.1); }
-  66% { transform: translate(-20px, 20px) scale(0.9); }
-  100% { transform: translate(0px, 0px) scale(1); }
-}
-.animate-blob { animation: blob 7s infinite; }
-.animation-delay-2000 { animation-delay: 2s; }
-.animation-delay-4000 { animation-delay: 4s; }
-
-.group:hover .faq-item { /* If needed for future groups */ }
-
-/* Apple-Inspired FAQ Polish: System Fonts & Subtle Depths */
-.faq-section { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-.faq-card { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06); } /* Layered subtlety */
-
-/* FAQ Grid Presence: Massive Gaps & Lifted Hovers */
-.faq-grid { gap: 3rem; } /* Extra space if needed */
-.faq-card { 
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy lift */
-  will-change: transform; /* Smooth GPU accel */
-}
-.faq-card:hover { 
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* Dramatic depth */
-}
-
-/* FAQ Testimonials Mirror: Grid & Card Styles */
+/* FAQ: Accordion with Red Borders & Italic Answers */
 .faq-grid { 
   display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-  gap: 2rem; 
-  max-width: 1200px; 
+  gap: 1rem; 
+  max-width: 800px; 
   margin: 0 auto; 
 }
 .faq-card { 
@@ -378,27 +229,81 @@ nav a:hover::after {
 .faq-card:hover { 
   box-shadow: 0 15px 40px rgba(220,53,69,0.1); /* Red-tinted lift like testimonials */
 }
+.faq-button { 
+  width: 100%; 
+  text-align: left; 
+  padding: 1.5rem; 
+  font-weight: bold; 
+  background: none; 
+  border: none; 
+  font-size: 1.1rem; 
+  cursor: pointer; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  border-left: 4px solid #dc3545; 
+}
+.faq-button:hover { background: #f8f9fa; }
+.faq-answer { 
+  padding: 0 1.5rem 1.5rem; 
+  font-style: italic; 
+  color: #6c757d; 
+  line-height: 1.6; 
+  max-height: 0; 
+  overflow: hidden; 
+  transition: max-height 0.3s ease; 
+}
+.faq-answer.open { max-height: 200px; }
 .testimonials-faq { /* Section BG match */
   background: linear-gradient(to bottom, #f8f9fa, #fff); 
   padding: 4rem 1rem; 
 }
 
-/* Footer Xeriweb Polish: Deep Gradients & Fluid Transitions */
+/* Countdown: Glassmorphic Timer */
+.countdown { 
+  background: rgba(255,255,255,0.1); 
+  backdrop-filter: blur(10px); 
+  border-radius: 1rem; 
+  padding: 2rem; 
+  text-align: center; 
+  margin: 2rem auto; 
+  max-width: 400px; 
+  border: 1px solid rgba(255,255,255,0.2); 
+}
+.time-unit { 
+  display: inline-block; 
+  margin: 0 0.5rem; 
+  padding: 0.5rem 1rem; 
+  background: rgba(220,53,69,0.2); 
+  border-radius: 0.5rem; 
+  font-weight: bold; 
+  min-width: 4rem; 
+}
+
+/* Footer Xeriweb Polish: Deep Gradients & Fluid Transitions + Multi-Color Gradient Underline on Hover */
 footer { 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* System sans for refinement */
+  background: linear-gradient(to right, #1a1a1a, #2d2d2d); 
+  color: white; 
+  padding: 4rem 1rem 2rem; 
 }
 footer h3 { 
   position: relative; 
+  cursor: pointer;
 }
 footer h3::after { 
   content: ''; 
   position: absolute; 
   bottom: -4px; 
   left: 0; 
-  width: 20px; 
+  width: 0; /* Starts hidden for hover effect */
   height: 2px; 
-  background: linear-gradient(to right, #dc3545, #fd7e14); 
+  background: linear-gradient(to right, #dc3545, #fd7e14, #ffc107, #17a2b8, #dc3545); /* Multi-color gradient like screenshot */
   border-radius: 1px; 
+  transition: width 0.3s ease;
+}
+footer h3:hover::after { 
+  width: 100%; 
 }
 footer a, footer button { 
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* Xeriweb cubic ease */
@@ -449,3 +354,47 @@ select {
   background-size: 1.5em; 
   padding-right: 2.5rem; 
 }
+
+/* Parallax & Particles (Xeriweb Depth + KNN Spark) */
+:root {
+  --parallax-speed: 0.5; /* Slower for hero depth */
+}
+
+.parallax-bg {
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+}
+
+#particles-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+@keyframes ignite-burst {
+  0% { opacity: 1; transform: scale(0) rotate(0deg); }
+  50% { opacity: 0.8; transform: scale(1.5) rotate(180deg); }
+  100% { opacity: 0; transform: scale(0) rotate(360deg); }
+}
+
+.particle { animation: ignite-burst 0.6s ease-out forwards; }
+
+/* Staggered Section Reveals */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.stagger-children.animate > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+.stagger-children.animate > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger-children.animate > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger-children.animate > *:nth-child(3) { transition-delay: 0.3s; }

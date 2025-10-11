@@ -1,4 +1,4 @@
-// src/components/Header.js (Cloudinary Logo: Fiery Transparent PNG)
+// src/components/Header.js (Cloudinary Logo: Fiery Transparent PNG + Hover Gradient Underline)
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -25,13 +25,13 @@ const Header = () => {
           <div className="flex items-center space-x-8">
             <Link 
               to="/" 
-              className={`transition ${location.pathname === '/' ? 'font-bold text-red-500' : 'text-gray-700 hover:text-red-500'}`}
+              className={`transition ${location.pathname === '/' ? 'font-bold text-red-500 active' : 'text-gray-700 hover:text-red-500'}`}
             >
               Home
             </Link>
             <Link 
               to="/shop" 
-              className={`transition ${location.pathname === '/shop' ? 'font-bold text-red-500' : 'text-gray-700 hover:text-red-500'}`}
+              className={`transition ${location.pathname === '/shop' ? 'font-bold text-red-500 active' : 'text-gray-700 hover:text-red-500'}`}
             >
               Shop
             </Link>
