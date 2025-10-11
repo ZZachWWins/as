@@ -1,4 +1,4 @@
-// src/components/Hero.js (Professional Polish: Apple-Inspired, Minimal Particles, Full Visibility with CTA Buttons)
+// src/components/Hero.js (Professional Polish: Apple-Inspired, Persistent Particles, Full Visibility with CTA Buttons)
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -11,12 +11,12 @@ const Hero = () => {
   const createParticle = (x, y) => ({
     x,
     y,
-    vx: (Math.random() - 0.5) * 2, // Reduced speed for subtlety
+    vx: (Math.random() - 0.5) * 2, // Subtle speed
     vy: (Math.random() - 0.5) * 2,
     size: Math.random() * 2 + 1, // Smaller particles
     color: `hsl(${Math.random() * 60 + 20}, 70%, 80%)`, // Softer colors
     life: 1,
-    decay: Math.random() * 0.01 + 0.005,
+    decay: Math.random() * 0.005 + 0.002, // Slower decay for persistence
   });
 
   useEffect(() => {
@@ -43,8 +43,20 @@ const Hero = () => {
         }
       };
     };
+
+    // Continuous particle spawning
+    const spawnParticles = () => {
+      for (let i = 0; i < 1; i++) { // Constant low-rate spawning
+        particles.current.push(createParticle(
+          Math.random() * canvas.width,
+          Math.random() * canvas.height
+        ));
+      }
+    };
+    const spawnInterval = setInterval(spawnParticles, 200); // Spawn every 200ms
+
     const handleScroll = throttle(() => {
-      for (let i = 0; i < 3; i++) { // Reduced particle spawn rate
+      for (let i = 0; i < 2; i++) { // Reduced but active on scroll
         particles.current.push(createParticle(
           Math.random() * canvas.width,
           Math.random() * canvas.height * 0.3
@@ -59,7 +71,7 @@ const Hero = () => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.globalAlpha = p.life * 0.5; // Reduced opacity for subtlety
+        ctx.globalAlpha = p.life * 0.5; // Subtle opacity
         ctx.fill();
 
         p.x += p.vx;
@@ -74,15 +86,15 @@ const Hero = () => {
     };
     animate();
 
-    setTimeout(() => {
-      for (let i = 0; i < 10; i++) { // Reduced initial particles
-        particles.current.push(createParticle(canvas.width / 2, canvas.height / 2));
-      }
-    }, 500);
+    // Increased initial particles for always-on effect
+    for (let i = 0; i < 30; i++) { // Increased from 10
+      particles.current.push(createParticle(canvas.width / 2, canvas.height / 2));
+    }
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('scroll', handleScroll);
+      clearInterval(spawnInterval); // Clean up interval
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -95,17 +107,17 @@ const Hero = () => {
              backgroundImage: 'ur[](https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)', 
              backgroundSize: 'cover', 
              backgroundPosition: 'center', 
-             opacity: 0.5, // Reduced opacity to improve text visibility
+             opacity: 0.5, // Reduced opacity for text visibility
              transform: `translateY(${window.scrollY * 0.2}px)` // Slower parallax
            }} 
       />
-      <div className="relative z-10 flex items-center justify-center h-screen pt-40 pb-16 px-4"> {/* Increased pt-40, used h-screen for full height */}
+      <div className="relative z-10 flex items-center justify-center h-screen pt-48 pb-16 px-4"> {/* Increased pt-48 to 12rem */}
         <div className="text-center max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-100 leading-tight mb-6" // Changed to gray-100 for better contrast
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-100 leading-tight mb-6"
             style={{ 
               textShadow: '0 2px 6px rgba(0,0,0,0.5)' // Stronger shadow for readability
             }}
@@ -116,7 +128,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed" // Changed to gray-300 for contrast
+            className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed"
           >
             Science-backed boosts for breath, focus, and flow. Join 5,000+ early adopters for exclusive pre-launch access.
           </motion.p>
