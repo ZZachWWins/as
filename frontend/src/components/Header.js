@@ -1,4 +1,4 @@
-// src/components/Header.js (Ultimate: Mobile Burger, Icon Nav, Scroll Parallax - Fixed Imports)
+// src/components/Header.js (Ultimate: Mobile Burger, Icon Nav, Scroll Parallax - Fixed Menu Width)
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -63,8 +63,8 @@ const Header = () => {
         </div>
       </nav>
 
-      {/* Mobile Nav */}
-      <div className="md:hidden">
+      {/* Mobile Nav - Constrained Sidebar */}
+      <div className="md:hidden relative">
         <Menu
           isOpen={isOpen}
           onStateChange={(state) => setIsOpen(state.isOpen)}
@@ -72,10 +72,24 @@ const Header = () => {
           customCrossIcon={<FiX className="text-2xl text-red-500" />}
           pageWrapId="page-wrap"
           outerContainerId="outer-container"
+          width="280"  // Fixed: Compact sidebar, not full-screen
+          overlayClassName="bg-black/50 backdrop-blur-sm"  // Subtle fade, not opaque block
           burgerBarClassName="bg-red-500"
           burgerButtonClassName="ml-4"
           crossButtonClassName="ml-4"
-          itemClassName="text-gray-700 hover:text-red-500 border-l-4 border-transparent hover:border-red-500 pl-4"
+          itemClassName="text-gray-700 hover:text-red-500 border-l-4 border-transparent hover:border-red-500 pl-4 py-2"
+          styles={{
+            bmMenu: {
+              background: '#fff',
+              padding: '2rem 1rem',
+              boxShadow: '2px 0 20px rgba(0,0,0,0.1)',
+            },
+            bmItem: {
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            },
+          }}
         >
           <AnimatePresence mode="wait">
             {navItems.map((item, i) => (
