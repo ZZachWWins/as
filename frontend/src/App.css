@@ -310,6 +310,8 @@ footer {
   padding: 4rem 0; 
   border-top: 1px solid rgba(220,53,69,0.1); 
   box-shadow: 0 -4px 20px rgba(0,0,0,0.2); 
+  position: relative; 
+  overflow: hidden; 
 }
 footer a, footer p, footer div { color: #333; } /* Ensure all text is dark */
 footer .btn { color: #333; } /* Dark gray text */

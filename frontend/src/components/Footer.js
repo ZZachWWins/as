@@ -1,5 +1,5 @@
-// src/components/Footer.js (Modern Sleek: Light Theme, Gradient Circles, Frosted Glass, Form Glow)
-import React from 'react';
+// src/components/Footer.js (Modern Sleek: Gradient Circles, Frosted Glass, Fluid Elements, Form Glow)
+import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -7,6 +7,7 @@ import { FiMail, FiTwitter, FiFacebook, FiHome, FiShoppingBag, FiShield, FiFileT
 
 const Footer = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
+  const canvasRef = useRef(null);
 
   const onSubmit = (data) => {
     fetch('/', {
@@ -30,6 +31,65 @@ const Footer = () => {
     visible: { opacity: 1, y: 0 },
   };
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = 100; // Fixed height for fluid layer
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const blobs = [];
+    for (let i = 0; i < 3; i++) {
+      blobs.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        radius: Math.random() * 50 + 20,
+      });
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      blobs.forEach(blob => {
+        ctx.beginPath();
+        const gradient = ctx.createRadialGradient(
+          blob.x, blob.y, 0,
+          blob.x, blob.y, blob.radius
+        );
+        gradient.addColorStop(0, '#ff0000'); // Red
+        gradient.addColorStop(0.5, '#ffaa00'); // Yellow
+        gradient.addColorStop(1, '#00aaff'); // Blue
+        ctx.fillStyle = gradient;
+        ctx.arc(blob.x, blob.y, blob.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        blob.x += blob.vx;
+        blob.y += blob.vy;
+        if (blob.x < 0 || blob.x > canvas.width) blob.vx *= -1;
+        if (blob.y < 0 || blob.y > canvas.height) blob.vy *= -1;
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+    animate();
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   return (
     <motion.footer 
       initial="hidden"
@@ -39,6 +99,7 @@ const Footer = () => {
       variants={columnVariants}
       animate="visible"
     >
+      <canvas ref={canvasRef} className="absolute bottom-0 left-0 w-full h-24 z-0 pointer-events-none" />
       <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-yellow-500 opacity-50"></div>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-12 justify-items-center">
@@ -48,13 +109,13 @@ const Footer = () => {
             </motion.h3>
             <nav className="space-y-3">
               <motion.div variants={itemVariants}>
-                <Link to="/" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-2" style={{ textDecoration: 'none' }}>
-                  <FiHome className="text-lg opacity-70 group-hover:opacity-100" /> Home
+                <Link to="/" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
+                  <FiHome className="text-xl opacity-70 group-hover:opacity-100" /> Home
                 </Link>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <Link to="/shop" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-2" style={{ textDecoration: 'none' }}>
-                  <FiShoppingBag className="text-lg opacity-70 group-hover:opacity-100" /> Shop
+                <Link to="/shop" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
+                  <FiShoppingBag className="text-xl opacity-70 group-hover:opacity-100" /> Shop
                 </Link>
               </motion.div>
             </nav>
@@ -68,11 +129,11 @@ const Footer = () => {
               Fuel your potential with science-backed energy boosts that last.
             </motion.p>
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-sm justify-center lg:justify-start">
-              <a href="/privacy-policy" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group rounded-full bg-white/20 backdrop-blur-md p-2" style={{ textDecoration: 'none' }}>
-                <FiShield className="text-lg" /> Privacy
+              <a href="/privacy-policy" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
+                <FiShield className="text-xl" /> Privacy
               </a>
-              <a href="/terms-of-service" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group rounded-full bg-white/20 backdrop-blur-md p-2" style={{ textDecoration: 'none' }}>
-                <FiFileText className="text-lg" /> Terms
+              <a href="/terms-of-service" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
+                <FiFileText className="text-xl" /> Terms
               </a>
             </motion.div>
           </motion.div>
@@ -114,7 +175,7 @@ const Footer = () => {
             transition={{ delay: 0.5 }}
           >
             <motion.div 
-              className="rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
+              className="rounded-full bg-white/20 backdrop-blur-md p-4 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
               whileHover={{ scale: 1.1, rotate: 360 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -126,7 +187,7 @@ const Footer = () => {
               </a>
             </motion.div>
             <motion.div 
-              className="rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
+              className="rounded-full bg-white/20 backdrop-blur-md p-4 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
               whileHover={{ scale: 1.1, rotate: 360 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -140,7 +201,7 @@ const Footer = () => {
               </a>
             </motion.div>
             <motion.div 
-              className="rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
+              className="rounded-full bg-white/20 backdrop-blur-md p-4 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
               whileHover={{ scale: 1.1, rotate: 360 }}
               whileTap={{ scale: 0.95 }}
             >
