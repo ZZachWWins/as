@@ -67,7 +67,7 @@ header .btn-outline:hover { color: #333; } /* Ensure hover keeps dark gray text 
   align-items: center; 
   gap: 0.5rem;
   padding: 1rem 2rem; 
-  background: linear-gradient(90deg, #ff0000, #ffaa00, #00aaff); /* Red to Yellow to Blue */
+  background: #fff; /* Default to white background */
   border: 1px solid rgba(255,255,255,0.2); 
   color: #333; /* Dark gray text */
   text-decoration: none; 
@@ -106,7 +106,7 @@ header .btn-outline:hover { color: #333; } /* Ensure hover keeps dark gray text 
   transform: scaleX(0); 
   transition: transform 0.3s ease; 
 }
-.btn:hover::after { transform: scaleX(1); } /* Gradient appears on hover */
+.btn:hover::after { transform: scaleX(1); } /* Gradient underline on hover */
 
 .btn-outline { 
   background: transparent; 
@@ -114,9 +114,9 @@ header .btn-outline:hover { color: #333; } /* Ensure hover keeps dark gray text 
   color: #333; /* Dark gray text */
 }
 .btn-outline:hover { 
-  background: linear-gradient(90deg, #ff0000, #ffaa00, #00aaff); /* Red to Yellow to Blue */
+  background: transparent; /* Remove gradient background on hover */
   border-color: transparent; 
-  color: #fff; /* White on hover for contrast */
+  color: #333; /* Keep dark gray text */
   box-shadow: 0 0 10px rgba(255,170,0,0.5); /* Subtle glow */
 }
 .btn-outline::after { 
@@ -130,7 +130,7 @@ header .btn-outline:hover { color: #333; } /* Ensure hover keeps dark gray text 
   transform: scaleX(0); 
   transition: transform 0.3s ease; 
 }
-.btn-outline:hover::after { transform: scaleX(1); } /* Gradient appears on hover */
+.btn-outline:hover::after { transform: scaleX(1); } /* Gradient underline on hover */
 
 /* Urgency: Bold Slide-In */
 .urgency { 
@@ -265,7 +265,7 @@ footer {
 }
 footer a, footer p, footer div { color: #333; } /* Ensure all text is dark */
 footer .btn { color: #333; } /* Dark gray text */
-footer .btn-outline:hover { color: #fff; } /* Revert to white on hover for contrast */
+footer .btn-outline:hover { color: #333; } /* Keep dark gray text on hover */
 footer .absolute { background: linear-gradient(to right, transparent, rgba(220,53,69,0.5), transparent); }
 
 /* Countdown: Glassy Pulse */
