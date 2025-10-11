@@ -36,14 +36,14 @@ body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; overflow
 
 /* Header Modern: Glassy, Fixed with Improved Readability */
 header { 
-  background: rgba(255,255,255,0.95); /* Light glassy background */
-  backdrop-filter: blur(20px); 
+  background: rgba(255,255,255,0.8); /* Adjusted for frosted glass */
+  backdrop-filter: blur(10px); 
   box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
   position: fixed; 
   top: 0; 
   left: 0; 
   right: 0; 
-  z-index: 50; 
+  z-50: z-index: 50; 
   border-bottom: 1px solid rgba(220,53,69,0.1); 
 }
 header a, header div { color: #333; } /* Dark text for readability */
@@ -110,15 +110,17 @@ header .btn-outline:hover { color: #333; } /* Ensure hover keeps dark gray text 
 
 .btn-outline { 
   background: transparent; 
-  border: 1px solid rgba(255,255,255,0.5); 
+  border: none; /* Removed box outline */
   color: #333; /* Dark gray text */
 }
 .btn-outline:hover { 
   background: transparent; /* No gradient background */
-  border: 2px solid; /* Prepare for gradient border */
-  border-image: linear-gradient(90deg, #ff0000, #ffaa00, #00aaff) 1; /* Gradient outline */
+  border: none; /* Ensure no border */
   color: #333; /* Keep dark gray text */
-  box-shadow: none; /* Remove yellow glow */
+  /* Gradient outline effect using border-image */
+  outline: 2px solid; /* Base outline */
+  outline-offset: 2px; /* Slight offset for visibility */
+  outline-image: linear-gradient(90deg, #ff0000, #ffaa00, #00aaff); /* Gradient outline */
 }
 .btn-outline::after { 
   content: ''; 

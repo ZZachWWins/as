@@ -1,4 +1,4 @@
-// src/components/Header.js (Modern Pop: Gradient Buttons on Links, Icon Hovers, Responsive Wrap)
+// src/components/Header.js (Modern Pop: Centered Menu, Frosted Glass, No Outline, Gradient Underline)
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -18,19 +18,19 @@ const Header = () => {
       initial={{ y: -100 }} 
       animate={{ y: 0 }} 
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg z-50 border-b border-red-100"
+      className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-lg z-50 border-b border-red-100"
     >
-      <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 md:gap-0">
-        <Link to="/" className="flex-shrink-0">
+      <nav className="max-w-7xl mx-auto px-6 py-4 flex flex-col items-center gap-6">
+        <Link to="/" className="flex-shrink-0 mb-4">
           <motion.img 
             src="https://res.cloudinary.com/deheojfkt/image/upload/Untitled_512_x_512_px_sdrcsv.png" 
             alt="Activate" 
-            className="logo-image h-10 w-auto" 
+            className="logo-image h-12 w-auto" 
             whileHover={{ scale: 1.05, rotate: 2 }} 
             transition={{ type: "spring", stiffness: 300 }} 
           />
         </Link>
-        <div className="flex flex-wrap justify-center md:justify-start items-center space-x-0 md:space-x-8 space-y-2 md:space-y-0 gap-2 md:gap-8">
+        <div className="flex flex-wrap justify-center items-center gap-8">
           {navItems.map((item, i) => (
             <motion.div key={i} whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }}>
               {item.to ? (
