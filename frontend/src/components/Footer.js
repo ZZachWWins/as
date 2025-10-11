@@ -39,20 +39,22 @@ const Footer = () => {
     let animationFrameId;
 
     const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight; // Dynamic height matching footer
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      const dpr = window.devicePixelRatio;
+      ctx.scale(dpr, dpr);
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
     const blobs = [];
-    for (let i = 0; i < 3; i++) { // Reduced for subtlety in footer
+    for (let i = 0; i < 6; i++) { // Increased for more wow factor
       blobs.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.8, // Gentle movement
-        vy: (Math.random() - 0.5) * 0.5,
-        radius: Math.random() * 40 + 20, // Smaller for footer scale
+        vx: (Math.random() - 0.5) * 1.2, // Slightly faster for dynamism
+        vy: (Math.random() - 0.5) * 0.8,
+        radius: Math.random() * 60 + 30, // Larger for impact
       });
     }
 
@@ -66,34 +68,36 @@ const Footer = () => {
           blob.x, blob.y, 0,
           blob.x, blob.y, blob.radius
         );
-        gradient.addColorStop(0, 'rgba(255, 0, 0, 0.2)');
-        gradient.addColorStop(0.5, 'rgba(255, 170, 0, 0.2)');
-        gradient.addColorStop(1, 'rgba(0, 170, 255, 0.2)');
+        gradient.addColorStop(0, 'rgba(255, 0, 0, 0.4)'); // Increased opacity for visibility
+        gradient.addColorStop(0.5, 'rgba(255, 170, 0, 0.4)');
+        gradient.addColorStop(1, 'rgba(0, 170, 255, 0.4)');
         ctx.fillStyle = gradient;
-        ctx.globalAlpha = 0.4; // Low opacity for background blend
+        ctx.globalAlpha = 0.6; // Boosted for wow factor
         ctx.arc(blob.x, blob.y, blob.radius, 0, Math.PI * 2);
         ctx.fill();
 
-        // Subtle connections for fluidity
+        // Enhanced connections for fluidity
         blobs.forEach(other => {
           if (other !== blob) {
             const dx = blob.x - other.x;
             const dy = blob.y - other.y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance < 100) {
+            if (distance < 120) { // Wider connections
               ctx.beginPath();
               ctx.moveTo(blob.x, blob.y);
               ctx.lineTo(other.x, other.y);
-              ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - distance / 1000})`;
-              ctx.lineWidth = 0.5;
-              ctx.globalAlpha = 0.2;
+              ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 - distance / 400})`; // Brighter lines
+              ctx.lineWidth = 1.5; // Thicker for effect
+              ctx.globalAlpha = 0.4;
               ctx.stroke();
             }
           }
         });
         ctx.globalAlpha = 1;
 
-        // Update position, confined to canvas
+        // Update position with easing for smoother movement
+        blob.vx *= 0.99; // Slight damping for organic feel
+        blob.vy *= 0.99;
         blob.x += blob.vx;
         blob.y += blob.vy;
         if (blob.x < blob.radius || blob.x > canvas.width - blob.radius) blob.vx *= -1;
@@ -115,14 +119,14 @@ const Footer = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="relative bg-white/10 backdrop-blur-2xl text-gray-800 py-16 border-t border-red-100 shadow-lg overflow-hidden"
+      className="relative bg-transparent backdrop-blur-2xl text-gray-800 py-16 border-t border-red-100 shadow-lg overflow-hidden"
       variants={columnVariants}
       animate="visible"
     >
       <canvas 
         ref={canvasRef} 
         className="absolute inset-0 w-full h-full z-0 pointer-events-none" 
-        style={{ mixBlendMode: 'screen' }}
+        style={{ mixBlendMode: 'screen', opacity: 0.7 }} // Adjusted for better visibility
       />
       <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-yellow-500 opacity-50 z-10"></div>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -156,7 +160,7 @@ const Footer = () => {
               <a href="/privacy-policy" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
                 <FiShield className="text-xl" /> Privacy
               </a>
-              <a href="/terms-of-service" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
+              <a href="/terms-of-service" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
                 <FiFileText className="text-xl" /> Terms
               </a>
             </motion.div>
@@ -191,53 +195,82 @@ const Footer = () => {
           </motion.div>
         </div>
 
-        <div className="border-t border-gray-200 pt-8">
+        <div className="border-t border-gray-200 pt-8 relative z-10">
           <motion.div 
-            className="flex justify-center gap-6 mb-8"
+            className="bg-black rounded-2xl p-8 text-center relative overflow-hidden mb-8"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5 }}
+            style={{
+              background: 'linear-gradient(to bottom, black 0%, black 80%, #16a34a 100%)' // Green gradient at bottom
+            }}
           >
-            <motion.div 
-              className="rounded-full bg-white/20 backdrop-blur-md p-4 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
-              whileHover={{ scale: 1.1, rotate: 360 }}
-              whileTap={{ scale: 0.95 }}
+            <motion.h3 
+              className="text-3xl font-bold text-yellow-400 mb-6" // Yellow "Connect"
+              variants={itemVariants}
             >
-              <a 
-                href="mailto:hello@activatesupplement.com" 
-                className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center text-2xl" style={{ textDecoration: 'none' }}
+              Connect
+            </motion.h3>
+            <div className="flex justify-center gap-8">
+              <motion.div 
+                className="rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 p-4 border-2 border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300 shadow-lg" // Site gradient border
+                whileHover={{ scale: 1.1, rotate: 360 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <FiMail />
-              </a>
-            </motion.div>
-            <motion.div 
-              className="rounded-full bg-white/20 backdrop-blur-md p-4 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
-              whileHover={{ scale: 1.1, rotate: 360 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <a 
-                href="https://twitter.com/activate_supplement" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center text-2xl" style={{ textDecoration: 'none' }}
+                <a 
+                  href="https://twitter.com/activate_supplement" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white flex items-center justify-center text-2xl" 
+                  style={{ textDecoration: 'none' }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+              </motion.div>
+              <motion.div 
+                className="rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 p-4 border-2 border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300 shadow-lg" // Site gradient border
+                whileHover={{ scale: 1.1, rotate: 360 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <FiTwitter />
-              </a>
-            </motion.div>
-            <motion.div 
-              className="rounded-full bg-white/20 backdrop-blur-md p-4 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
-              whileHover={{ scale: 1.1, rotate: 360 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <a 
-                href="https://facebook.com/activate_supplement" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center text-2xl" style={{ textDecoration: 'none' }}
+                <a 
+                  href="https://linkedin.com/company/activate-supplement" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white flex items-center justify-center text-2xl" 
+                  style={{ textDecoration: 'none' }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+              </motion.div>
+              <motion.div 
+                className="rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 p-4 border-2 border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300 shadow-lg" // Site gradient border
+                whileHover={{ scale: 1.1, rotate: 360 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <FiFacebook />
-              </a>
-            </motion.div>
+                <a 
+                  href="https://github.com/activate-supplement" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white flex items-center justify-center text-2xl" 
+                  style={{ textDecoration: 'none' }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+              </motion.div>
+              <motion.div 
+                className="rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 p-4 border-2 border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300 shadow-lg" // Site gradient border
+                whileHover={{ scale: 1.1, rotate: 360 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <a 
+                  href="mailto:hello@activatesupplement.com" 
+                  className="text-white flex items-center justify-center text-2xl" 
+                  style={{ textDecoration: 'none' }}
+                >
+                  <FiMail />
+                </a>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
 
