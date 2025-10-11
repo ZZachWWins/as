@@ -34,11 +34,11 @@ body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; overflow
 .logo-image { height: 50px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); border-radius: 8px; cursor: pointer; }
 .logo-image:hover { transform: scale(1.05) rotate(2deg); filter: drop-shadow(0 4px 8px rgba(220,53,69,0.3)); }
 
-/* Header Modern: Glassy, Fixed */
+/* Header Modern: Glassy, Fixed with Improved Readability */
 header { 
-  background: rgba(255,255,255,0.95); 
+  background: rgba(0, 0, 0, 0.7); /* Darker glassmorphism base */
   backdrop-filter: blur(20px); 
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2); 
   position: fixed; 
   top: 0; 
   left: 0; 
@@ -46,6 +46,9 @@ header {
   z-index: 50; 
   border-bottom: 1px solid rgba(220,53,69,0.1); 
 }
+header a, header div { color: #333; } /* Dark text for readability */
+header .btn-outline { color: #fff; } /* Keep button text white */
+header .btn-outline:hover { color: #fff; } /* Ensure hover keeps white text */
 
 /* Hero: Immersive, Gradient Text Pop */
 .hero { 
@@ -237,6 +240,20 @@ select {
   background-size: 1.5em; 
   padding-right: 2.5rem; 
 }
+
+/* Footer Modern: Glassy with Improved Readability */
+footer { 
+  background: rgba(0, 0, 0, 0.7); /* Darker glassmorphism base */
+  backdrop-filter: blur(20px); 
+  color: #333; /* Dark text for readability */
+  py-16: padding: 4rem 0; 
+  border-top: 1px solid rgba(220,53,69,0.1); 
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.2); 
+}
+footer a, footer p, footer div { color: #333; } /* Ensure all text is readable */
+footer .btn { color: #fff; } /* Keep button text white */
+footer .btn-outline:hover { color: #fff; } /* Ensure hover keeps white text */
+footer .absolute { background: linear-gradient(to right, transparent, rgba(220,53,69,0.5), transparent); }
 
 /* Countdown: Glassy Pulse */
 .countdown { 
