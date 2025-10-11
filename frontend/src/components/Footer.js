@@ -1,4 +1,4 @@
-// src/components/Footer.js (Modern Sleek: Light Theme, Gradient Hovers, Centered, Form Glow)
+// src/components/Footer.js (Modern Sleek: Light Theme, Gradient Buttons on Links, Centered, Form Glow)
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -48,15 +48,13 @@ const Footer = () => {
             </motion.h3>
             <nav className="space-y-3">
               <motion.div variants={itemVariants}>
-                <Link to="/" className="block text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group">
+                <Link to="/" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group">
                   <FiHome className="text-sm opacity-70 group-hover:opacity-100" /> Home
-                  <span className="h-0.5 bg-gradient-to-r from-red-500 to-yellow-500 w-0 group-hover:w-full transition-all duration-300 block"></span>
                 </Link>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <Link to="/shop" className="block text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group">
+                <Link to="/shop" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group">
                   <FiShoppingBag className="text-sm opacity-70 group-hover:opacity-100" /> Shop
-                  <span className="h-0.5 bg-gradient-to-r from-red-500 to-yellow-500 w-0 group-hover:w-full transition-all duration-300 block"></span>
                 </Link>
               </motion.div>
             </nav>
@@ -70,13 +68,11 @@ const Footer = () => {
               Fuel your potential with science-backed energy boosts that last.
             </motion.p>
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-sm justify-center lg:justify-start">
-              <a href="/privacy-policy" className="text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group">
+              <a href="/privacy-policy" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group">
                 <FiShield className="text-xs" /> Privacy
-                <span className="h-0.5 bg-gradient-to-r from-red-500 to-yellow-500 w-0 group-hover:w-full transition-all duration-300 block"></span>
               </a>
-              <a href="/terms-of-service" className="text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group">
+              <a href="/terms-of-service" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group">
                 <FiFileText className="text-xs" /> Terms
-                <span className="h-0.5 bg-gradient-to-r from-red-500 to-yellow-500 w-0 group-hover:w-full transition-all duration-300 block"></span>
               </a>
             </motion.div>
           </motion.div>
@@ -101,7 +97,7 @@ const Footer = () => {
                 type="submit" 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-gradient-to-r from-red-500 to-yellow-500 rounded-full font-semibold hover:from-red-600 hover:to-yellow-600 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-1 text-white text-sm"
+                className="btn px-6 py-3 font-semibold transition-all duration-300 shadow-lg flex items-center justify-center gap-1 text-white text-sm"
               >
                 Join <FiArrowRight className="text-xs" />
               </motion.button>

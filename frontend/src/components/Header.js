@@ -1,4 +1,4 @@
-// src/components/Header.js (Modern Pop: Gradient Badge, Icon Hovers, Responsive Wrap)
+// src/components/Header.js (Modern Pop: Gradient Buttons on Links, Icon Hovers, Responsive Wrap)
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -36,8 +36,8 @@ const Header = () => {
               {item.to ? (
                 <Link 
                   to={item.to} 
-                  className={`relative flex items-center gap-2 transition-all duration-300 text-sm md:text-base ${
-                    location.pathname === item.to ? 'font-bold text-red-500' : 'text-gray-700 hover:text-red-500'
+                  className={`btn-outline relative flex items-center gap-2 transition-all duration-300 text-sm md:text-base ${
+                    location.pathname === item.to ? 'font-bold' : ''
                   }`}
                 >
                   {item.icon}
