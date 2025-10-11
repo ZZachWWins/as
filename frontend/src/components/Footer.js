@@ -1,9 +1,9 @@
-// src/components/Footer.js (Symphonic: Hook-Form Newsletter, Icon Grid, Infinite Reveal)
+// src/components/Footer.js (Symphonic: Hook-Form Newsletter, Icon Grid, Infinite Reveal - Fixed Imports)
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form'; // npm i react-hook-form
-import { FiMail, FiTwitter, FiFacebook, FiHome, FiShoppingBag, FiShield, FiFileText } from 'react-icons/fi'; // npm i react-icons
+import { FiMail, FiTwitter, FiFacebook, FiHome, FiShoppingBag, FiShield, FiFileText, FiArrowRight } from 'react-icons/fi'; // npm i react-icons
 
 const Footer = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();

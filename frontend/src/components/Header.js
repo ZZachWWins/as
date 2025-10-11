@@ -1,9 +1,9 @@
-// src/components/Header.js (Ultimate: Mobile Burger, Icon Nav, Scroll Parallax)
+// src/components/Header.js (Ultimate: Mobile Burger, Icon Nav, Scroll Parallax - Fixed Imports)
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { slide as Menu } from 'react-burger-menu'; // npm i react-burger-menu
-import { FiHome, FiShoppingBag, FiUsers } from 'react-icons/fi'; // npm i react-icons
+import { FiHome, FiShoppingBag, FiUsers, FiMenu, FiX } from 'react-icons/fi'; // npm i react-icons
 
 const Header = () => {
   const location = useLocation();
