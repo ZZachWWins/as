@@ -1,30 +1,29 @@
-// src/components/InterestForm.js (Quiz Personalization: Why Boost? + Incentive)
+// src/components/InterestForm.js (Sleek Modern: Floating Labels, Glow Focus, Gradient Submit)
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form'; // Modern form handling
 
 const InterestForm = () => {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [painPoint, setPainPoint] = useState(''); // New: Quiz dropdown
   const [status, setStatus] = useState('idle');
   const navigate = useNavigate();
+  const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!email || !email.includes('@')) {
+  const painPoint = watch('painPoint');
+
+  const onSubmit = async (data) => {
+    if (!data.email || !data.email.includes('@')) {
       setStatus('error');
       return;
     }
     setStatus('submitting');
-    const data = new FormData();
-    data.append('email', email);
-    data.append('name', name);
-    data.append('painPoint', painPoint); // Send to backend
-    data.append('form-name', 'activate-interest');
+    const formData = new FormData();
+    Object.keys(data).forEach(key => formData.append(key, data[key]));
+    formData.append('form-name', 'activate-interest');
     try {
-      await fetch('/', { method: 'POST', body: new URLSearchParams(data) });
+      await fetch('/', { method: 'POST', body: new URLSearchParams(formData) });
       setStatus('success');
+      reset();
       setTimeout(() => navigate('/'), 4000);
     } catch {
       setStatus('error');
@@ -42,25 +41,20 @@ const InterestForm = () => {
         {status === 'idle' && (
           <motion.form
             key="form"
-            name="activate-interest"
-            data-netlify="true"
-            onSubmit={handleSubmit}
-            className="space-y-4"
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-6"
           >
-            <input type="hidden" name="form-name" value="activate-interest" />
-            <h3 className="text-2xl font-bold text-center text-gray-800">Fuel Your Breakthrough</h3>
-            <p className="text-center text-gray-600 text-sm">Quick quiz: What's draining your energy? Get tailored tips + 20% off launch. Zero spam.</p>
+            <h3 className="text-3xl font-bold text-center text-gray-800 mb-2">Fuel Your Breakthrough</h3>
+            <p className="text-center text-gray-600 text-sm mb-6">Quick quiz: What's draining your energy? Get tailored tips + 20% off launch. Zero spam.</p>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
               placeholder="Your Name (Optional)"
-              className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition-all duration-300 text-center text-base"
+              {...register('name')}
+              className="form-input"
             />
             <select
-              value={painPoint}
-              onChange={(e) => setPainPoint(e.target.value)}
-              className="w-full p-3 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition-all duration-300 text-center text-base bg-white"
+              {...register('painPoint', { required: 'Select an option' })}
+              className="form-input"
             >
               <option value="">What's your biggest energy killer?</option>
               <option value="fatigue">Midday crashes</option>
@@ -68,14 +62,14 @@ const InterestForm = () => {
               <option value="recovery">Slow recovery</option>
               <option value="stress">Stress overload</option>
             </select>
+            {errors.painPoint && <p className="text-red-500 text-xs text-center">Please select an option.</p>}
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
-              className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-red-500 focus:outline-none transition-all duration-300 text-center text-lg"
-              required
+              {...register('email', { required: 'Email is required' })}
+              className="form-input"
             />
+            {errors.email && <p className="text-red-500 text-xs text-center">Please enter a valid email.</p>}
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -87,7 +81,6 @@ const InterestForm = () => {
             <p className="text-xs text-gray-500 text-center">Join 5,000+ transforming their edge</p>
           </motion.form>
         )}
-        {/* Submitting, Success, Error unchanged – keep the delight */}
         {status === 'submitting' && (
           <motion.div key="submitting" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center space-y-4">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto"></div>
@@ -116,7 +109,6 @@ const InterestForm = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="hidden"><input name="bot-field" /></div>
     </motion.div>
   );
 };

@@ -1,4 +1,4 @@
-// src/components/FAQ.js (Testimonials Mirror: Grid Cards, Red Borders, Italic Answers, Staggered)
+// src/components/FAQ.js (Sleek Accordion: Glass Cards, Smooth Expand, Icon Chevron)
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
@@ -34,24 +34,24 @@ const FAQ = () => {
       <motion.h2 
         initial={{ opacity: 0, y: 20 }} 
         whileInView={{ opacity: 1, y: 0 }} 
-        className="text-4xl font-bold text-center mb-12 text-gray-800"
+        className="text-5xl font-bold text-center mb-12 text-gray-800 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent"
       >
         Frequently Asked Questions
       </motion.h2>
-      <div className="faq-grid stagger-children" whileInView={{ className: 'stagger-children animate' }} viewport={{ once: true }}> {/* Mirror testimonial-grid */}
+      <div className="faq-grid stagger-children" whileInView={{ className: 'stagger-children animate' }} viewport={{ once: true }}>
         {faqs.map((faq, index) => (
           <motion.div 
             key={index}
             initial={{ opacity: 0, x: -20 }} 
             whileInView={{ opacity: 1, x: 0 }} 
             transition={{ delay: index * 0.1 }}
-            className="faq-card" // Mirror testimonial
+            className="faq-card"
           >
             <button
               onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              className="w-full text-left p-6 font-bold text-gray-800 hover:bg-red-50/50 transition-colors flex justify-between items-center border-l-4 border-red-500" // Red left border like testimonial
+              className="faq-button"
             >
-              <span className="text-lg pr-4">{faq.question}</span> {/* Bold question like author */}
+              <span className="text-lg pr-4">{faq.question}</span>
               <motion.span 
                 animate={{ rotate: openIndex === index ? 180 : 0 }} 
                 transition={{ duration: 0.3 }}
@@ -67,11 +67,9 @@ const FAQ = () => {
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
+                  className="faq-answer"
                 >
-                  <p className="p-6 italic text-gray-700 border-t border-gray-100 leading-relaxed"> {/* Italic like quote */}
-                    {faq.answer}
-                  </p>
+                  <p className="italic text-gray-700 leading-relaxed">{faq.answer}</p>
                 </motion.div>
               )}
             </AnimatePresence>

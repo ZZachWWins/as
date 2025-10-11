@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { FaFire, FaChartLine, FaQuestionCircle, FaRocket } from 'react-icons/fa'; // Removed unused FaQuoteLeft
+import { FaFire, FaChartLine, FaQuestionCircle, FaRocket } from 'react-icons/fa';
 import Hero from './Hero';
 import Benefits from './Benefits';
 import Testimonials from './Testimonials';
@@ -19,7 +19,7 @@ const sectionVariants = {
     transition: {
       duration: 0.8,
       ease: [0.22, 1, 0.36, 1],
-      staggerChildren: 0.15, // Orchestral stagger
+      staggerChildren: 0.15,
       delayChildren: 0.2,
     },
   },
@@ -50,8 +50,8 @@ const Home = () => (
       initial="hidden"
       whileInView="visible"
       whileHover="hover"
-      viewport={{ once: true, margin: "-100px" }} // Earlier trigger for flow
-      className="py-20 bg-gradient-to-b from-white to-red-50" // Subtle energy fade
+      viewport={{ once: true, margin: "-100px" }}
+      className="py-20 bg-gradient-to-b from-white to-red-50"
       id="benefits"
     >
       <div className="max-w-7xl mx-auto px-4 text-center">

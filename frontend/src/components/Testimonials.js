@@ -1,6 +1,7 @@
-// src/components/Testimonials.js (New: Credibility Booster + Stagger on Grid)
+// src/components/Testimonials.js (Modern Cards: Gradient Quotes, Hover Lift, Author Icons)
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaUser } from 'react-icons/fa';
 
 const testimonials = [
   {
@@ -22,7 +23,7 @@ const Testimonials = () => (
     <motion.h2 
       initial={{ opacity: 0, y: 20 }} 
       whileInView={{ opacity: 1, y: 0 }} 
-      className="text-4xl font-bold text-center mb-12 text-gray-800"
+      className="text-5xl font-bold text-center mb-12 text-gray-800 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent"
     >
       What Early Testers Are Saying
     </motion.h2>
@@ -33,11 +34,13 @@ const Testimonials = () => (
           initial={{ opacity: 0, x: -20 }} 
           whileInView={{ opacity: 1, x: 0 }} 
           transition={{ delay: index * 0.1 }}
-          whileHover={{ scale: 1.02 }}
-          className="testimonial"
+          whileHover={{ scale: 1.02, y: -5 }}
+          className="testimonial rounded-2xl p-6 shadow-lg border border-gray-100 bg-white/80 backdrop-blur-sm"
         >
-          <p className="text-gray-700 mb-4">"{testimonial.quote}"</p>
-          <p className="testimonial-author">— {testimonial.author}</p>
+          <p className="text-gray-700 mb-4 italic leading-relaxed text-lg">"{testimonial.quote}"</p>
+          <p className="testimonial-author flex items-center gap-2 text-gray-600 font-semibold">
+            <FaUser className="text-red-500" /> — {testimonial.author}
+          </p>
         </motion.div>
       ))}
     </div>

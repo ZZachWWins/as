@@ -1,8 +1,8 @@
-// src/components/Header.js (Updated: No Hamburger/Menu - Full Nav Links on Mobile Too, Responsive Layout - ESLint Fix: Removed Unused isMobile)
+// src/components/Header.js (Modern Pop: Gradient Badge, Icon Hovers, Responsive Wrap)
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FiHome, FiShoppingBag, FiUsers } from 'react-icons/fi'; // npm i react-icons
+import { FiHome, FiShoppingBag, FiUsers } from 'react-icons/fi';
 
 const Header = () => {
   const location = useLocation();
@@ -18,9 +18,8 @@ const Header = () => {
       initial={{ y: -100 }} 
       animate={{ y: 0 }} 
       className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg z-50 border-b border-red-100"
-      style={{ transform: `translateY(${Math.max(0, window.scrollY * 0.1)}px)` }} // Subtle parallax
+      style={{ transform: `translateY(${Math.max(0, window.scrollY * 0.1)}px)` }}
     >
-      {/* Unified Nav: Full Links on All Screens, Responsive (Wraps/Squeezes on Mobile) */}
       <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 md:gap-0">
         <Link to="/" className="flex-shrink-0">
           <motion.img 
@@ -45,7 +44,7 @@ const Header = () => {
                   {item.label}
                 </Link>
               ) : (
-                <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white px-3 py-1 rounded-full text-xs md:text-sm font-bold flex items-center gap-1">
+                <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white px-3 py-1 rounded-full text-xs md:text-sm font-bold flex items-center gap-1 shadow-lg">
                   <FiUsers className="text-xs" />
                   {item.label}
                 </div>

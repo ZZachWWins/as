@@ -1,8 +1,8 @@
-// src/App.js (Enhanced: Lenis Smooth Scroll, Theme Context if Needed Later + Burger Menu Fix: Outer Container & Page Wrap)
+// src/App.js (Enhanced: Lenis Smooth Scroll + Google Fonts Preload for Pop/Inter)
 import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import Lenis from 'lenis';  // Updated import
+import Lenis from 'lenis';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import './App.css';
@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // xeriweb-smooth cubic
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
 
     const raf = (time) => {
@@ -44,14 +44,12 @@ function App() {
 
   return (
     <Router>
-      <div id="outer-container" className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col">
         <Header />
-        <div id="page-wrap" className="flex-1 flex flex-col">
-          <main className="flex-1" role="main" aria-label="Main content">
-            <AnimatedRoutes />
-          </main>
-          <Footer />
-        </div>
+        <main className="flex-1" role="main" aria-label="Main content">
+          <AnimatedRoutes />
+        </main>
+        <Footer />
       </div>
     </Router>
   );
