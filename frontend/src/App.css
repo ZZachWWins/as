@@ -36,9 +36,9 @@ body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; overflow
 
 /* Header Modern: Glassy, Fixed with Improved Readability */
 header { 
-  background: rgba(0, 0, 0, 0.7); /* Darker glassmorphism base */
+  background: rgba(255,255,255,0.95); /* Reverted to original light glassy background */
   backdrop-filter: blur(20px); 
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2); 
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
   position: fixed; 
   top: 0; 
   left: 0; 
@@ -61,7 +61,7 @@ header .btn-outline:hover { color: #fff; } /* Ensure hover keeps white text */
 }
 .hero > * { position: relative; z-index: 2; }
 
-/* Buttons: Glassy Modern - Gradient, Glow, Scale */
+/* Buttons: Glassy Modern - Gradient, Glow, Scale with Underline on Hover */
 .btn { 
   display: inline-flex; 
   align-items: center; 
@@ -95,6 +95,19 @@ header .btn-outline:hover { color: #fff; } /* Ensure hover keeps white text */
   transform: translateY(-3px) scale(1.05); 
   box-shadow: 0 8px 25px rgba(0,0,0,0.3); 
 }
+.btn::after { 
+  content: ''; 
+  position: absolute; 
+  bottom: -2px; 
+  left: 5%; 
+  width: 90%; 
+  height: 2px; 
+  background: linear-gradient(90deg, #ff0000, #ffaa00, #00aaff); 
+  transform: scaleX(0); 
+  transition: transform 0.3s ease; 
+}
+.btn:hover::after { transform: scaleX(1); }
+
 .btn-outline { 
   background: transparent; 
   border: 1px solid rgba(255,255,255,0.5); 
@@ -243,14 +256,14 @@ select {
 
 /* Footer Modern: Glassy with Improved Readability */
 footer { 
-  background: rgba(0, 0, 0, 0.7); /* Darker glassmorphism base */
+  background: rgba(255,255,255,0.95); /* Reverted to original light glassy background */
   backdrop-filter: blur(20px); 
-  color: #333; /* Dark text for readability */
-  padding: 4rem 0; /* Corrected from py-16: */
+  color: #333; /* Dark text for all footer text */
+  padding: 4rem 0; 
   border-top: 1px solid rgba(220,53,69,0.1); 
   box-shadow: 0 -4px 20px rgba(0,0,0,0.2); 
 }
-footer a, footer p, footer div { color: #333; } /* Ensure all text is readable */
+footer a, footer p, footer div { color: #333; } /* Ensure all text is dark */
 footer .btn { color: #fff; } /* Keep button text white */
 footer .btn-outline:hover { color: #fff; } /* Ensure hover keeps white text */
 footer .absolute { background: linear-gradient(to right, transparent, rgba(220,53,69,0.5), transparent); }
