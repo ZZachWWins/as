@@ -139,9 +139,8 @@ header .btn-outline:hover { color: #333; } /* Ensure hover keeps dark gray text 
   align-items: center; 
   gap: 0.5rem;
   padding: 1rem 2rem; 
-  background: linear-gradient(90deg, #ff0000, #ffaa00, #00aaff); /* Red to Yellow to Blue */
-  border: 1px solid rgba(255,255,255,0.2); 
-  color: #fff; /* White text for contrast */
+  background: linear-gradient(90deg, #ff0000, #ffaa00, #00aaff);
+  color: #fff;
   text-decoration: none; 
   border-radius: 50px; 
   font-weight: 600; 
@@ -152,17 +151,6 @@ header .btn-outline:hover { color: #333; } /* Ensure hover keeps dark gray text 
   position: relative; 
   overflow: hidden; 
 }
-.cta-btn::before { 
-  content: ''; 
-  position: absolute; 
-  top: 0; 
-  left: -100%; 
-  width: 100%; 
-  height: 100%; 
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); 
-  transition: left 0.5s; 
-}
-.cta-btn:hover::before { left: 100%; }
 .cta-btn:hover { 
   transform: translateY(-3px) scale(1.05); 
   box-shadow: 0 8px 25px rgba(0,0,0,0.3); 
@@ -174,39 +162,19 @@ header .btn-outline:hover { color: #333; } /* Ensure hover keeps dark gray text 
   left: 0; 
   width: 100%; 
   height: 2px; 
-  background: linear-gradient(90deg, #ff0000, #ffaa00, #00aaff); /* Cool gradient */
+  background: #fff; 
   transform: scaleX(0); 
   transition: transform 0.3s ease; 
 }
-.cta-btn:hover::after { transform: scaleX(1); } /* Gradient underline on hover */
+.cta-btn:hover::after { transform: scaleX(1); } /* White underline on hover */
 
-/* Urgency: Bold Slide-In */
-.urgency { 
-  background: linear-gradient(90deg, #dc3545, #fd7e14); 
-  color: white; 
-  text-align: center; 
-  padding: 1rem; 
-  font-weight: 700; 
-  letter-spacing: 0.5px; 
-  animation: slideIn 0.5s ease-out; 
-}
-@keyframes slideIn { 
-  from { transform: translateX(-100%); opacity: 0; } 
-  to { transform: translateX(0); opacity: 1; } 
-}
-
-/* Benefits: Card Glow */
-.benefits-grid { 
-  display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-  gap: 2rem; 
-}
+/* Benefits Cards */
 .benefits-card { 
   background: rgba(255,255,255,0.95); 
   backdrop-filter: blur(10px); 
-  border-radius: 1.5rem; 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-  overflow: hidden; 
+  border-radius: 1rem; 
+  padding: 2rem; 
+  text-align: center; 
   border: 1px solid rgba(220,53,69,0.1); 
   transition: all 0.3s ease; 
 }
@@ -302,10 +270,10 @@ select {
   padding-right: 2.5rem; 
 }
 
-/* Footer Modern: Glassy with Improved Readability */
+/* Footer Modern: Glassy with Fluid Effect and Improved Readability */
 footer { 
-  background: rgba(255,255,255,0.95); /* Light glassy background */
-  backdrop-filter: blur(20px); 
+  background: rgba(255,255,255,0.1); /* More transparent for fluid effect */
+  backdrop-filter: blur(24px); /* Stronger blur for frosted glass */
   color: #333; /* Dark text for all footer text */
   padding: 4rem 0; 
   border-top: 1px solid rgba(220,53,69,0.1); 
@@ -313,10 +281,22 @@ footer {
   position: relative; 
   overflow: hidden; 
 }
-footer a, footer p, footer div { color: #333; } /* Ensure all text is dark */
-footer .btn { color: #333; } /* Dark gray text */
-footer .btn-outline:hover { color: #333; } /* Keep dark gray text on hover */
-footer .absolute { background: linear-gradient(to right, transparent, rgba(220,53,69,0.5), transparent); }
+footer a, footer p, footer div { 
+  color: #333; /* Ensure all text is dark */
+  position: relative; /* Ensure content stays above canvas */
+  z-index: 10; /* Explicitly above canvas */
+}
+footer .btn { 
+  color: #333; /* Dark gray text */
+}
+footer .btn-outline:hover { 
+  color: #333; /* Keep dark gray text on hover */
+}
+footer canvas { 
+  height: 100% !important;
+  width: 100% !important;
+  background: transparent !important;
+}
 
 /* Countdown: Glassy Pulse */
 .countdown { 

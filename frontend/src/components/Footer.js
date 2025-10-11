@@ -39,8 +39,9 @@ const Footer = () => {
     let animationFrameId;
 
     const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * window.devicePixelRatio;
+      canvas.height = rect.height * window.devicePixelRatio;
       const dpr = window.devicePixelRatio;
       ctx.scale(dpr, dpr);
     };
@@ -50,8 +51,8 @@ const Footer = () => {
     const blobs = [];
     for (let i = 0; i < 6; i++) { // Increased for more wow factor
       blobs.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
+        x: Math.random() * canvas.width / window.devicePixelRatio,
+        y: Math.random() * canvas.height / window.devicePixelRatio,
         vx: (Math.random() - 0.5) * 1.2, // Slightly faster for dynamism
         vy: (Math.random() - 0.5) * 0.8,
         radius: Math.random() * 60 + 30, // Larger for impact
@@ -59,8 +60,10 @@ const Footer = () => {
     }
 
     const animate = () => {
-      // Clear with transparency for blending
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Clear with subtle tint for better visibility without full transparency loss
+      ctx.clearRect(0, 0, canvas.width / window.devicePixelRatio, canvas.height / window.devicePixelRatio);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.02)'; // Very subtle dark tint to help blending
+      ctx.fillRect(0, 0, canvas.width / window.devicePixelRatio, canvas.height / window.devicePixelRatio);
 
       blobs.forEach(blob => {
         ctx.beginPath();
@@ -68,11 +71,11 @@ const Footer = () => {
           blob.x, blob.y, 0,
           blob.x, blob.y, blob.radius
         );
-        gradient.addColorStop(0, 'rgba(255, 0, 0, 0.4)'); // Increased opacity for visibility
-        gradient.addColorStop(0.5, 'rgba(255, 170, 0, 0.4)');
-        gradient.addColorStop(1, 'rgba(0, 170, 255, 0.4)');
+        gradient.addColorStop(0, 'rgba(255, 0, 0, 0.6)'); // Increased opacity for visibility
+        gradient.addColorStop(0.5, 'rgba(255, 170, 0, 0.6)');
+        gradient.addColorStop(1, 'rgba(0, 170, 255, 0.6)');
         ctx.fillStyle = gradient;
-        ctx.globalAlpha = 0.6; // Boosted for wow factor
+        ctx.globalAlpha = 0.8; // Boosted for wow factor and visibility
         ctx.arc(blob.x, blob.y, blob.radius, 0, Math.PI * 2);
         ctx.fill();
 
@@ -86,9 +89,9 @@ const Footer = () => {
               ctx.beginPath();
               ctx.moveTo(blob.x, blob.y);
               ctx.lineTo(other.x, other.y);
-              ctx.strokeStyle = `rgba(255, 255, 255, ${0.3 - distance / 400})`; // Brighter lines
+              ctx.strokeStyle = `rgba(255, 255, 255, ${0.4 - distance / 400})`; // Brighter lines
               ctx.lineWidth = 1.5; // Thicker for effect
-              ctx.globalAlpha = 0.4;
+              ctx.globalAlpha = 0.5;
               ctx.stroke();
             }
           }
@@ -100,8 +103,8 @@ const Footer = () => {
         blob.vy *= 0.99;
         blob.x += blob.vx;
         blob.y += blob.vy;
-        if (blob.x < blob.radius || blob.x > canvas.width - blob.radius) blob.vx *= -1;
-        if (blob.y < blob.radius || blob.y > canvas.height - blob.radius) blob.vy *= -1;
+        if (blob.x < blob.radius || blob.x > (canvas.width / window.devicePixelRatio) - blob.radius) blob.vx *= -1;
+        if (blob.y < blob.radius || blob.y > (canvas.height / window.devicePixelRatio) - blob.radius) blob.vy *= -1;
       });
 
       animationFrameId = requestAnimationFrame(animate);
@@ -119,14 +122,14 @@ const Footer = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="relative bg-transparent backdrop-blur-2xl text-gray-800 py-16 border-t border-red-100 shadow-lg overflow-hidden"
+      className="relative bg-transparent backdrop-blur-2xl text-black py-16 border-t border-red-100 shadow-lg overflow-hidden"
       variants={columnVariants}
       animate="visible"
     >
       <canvas 
         ref={canvasRef} 
         className="absolute inset-0 w-full h-full z-0 pointer-events-none" 
-        style={{ mixBlendMode: 'screen', opacity: 0.7 }} // Adjusted for better visibility
+        style={{ background: 'transparent', opacity: 1 }} // Removed blend mode, full opacity for visibility
       />
       <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-yellow-500 opacity-50 z-10"></div>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -137,12 +140,12 @@ const Footer = () => {
             </motion.h3>
             <nav className="space-y-3">
               <motion.div variants={itemVariants}>
-                <Link to="/" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
+                <Link to="/" className="block btn-outline text-black hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
                   <FiHome className="text-xl opacity-70 group-hover:opacity-100" /> Home
                 </Link>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <Link to="/shop" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
+                <Link to="/shop" className="block btn-outline text-black hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
                   <FiShoppingBag className="text-xl opacity-70 group-hover:opacity-100" /> Shop
                 </Link>
               </motion.div>
@@ -153,14 +156,14 @@ const Footer = () => {
             <motion.h3 variants={itemVariants} className="text-2xl font-bold tracking-tight flex items-center justify-center lg:justify-start gap-2 mb-4">
               <FiShield className="text-yellow-500" /> Activate
             </motion.h3>
-            <motion.p variants={itemVariants} className="text-gray-600 leading-relaxed max-w-xs">
+            <motion.p variants={itemVariants} className="text-black leading-relaxed max-w-xs">
               Fuel your potential with science-backed energy boosts that last.
             </motion.p>
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-sm justify-center lg:justify-start">
-              <a href="/privacy-policy" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
+              <a href="/privacy-policy" className="btn-outline text-black hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
                 <FiShield className="text-xl" /> Privacy
               </a>
-              <a href="/terms-of-service" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
+              <a href="/terms-of-service" className="block btn-outline text-black hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)]" style={{ textDecoration: 'none' }}>
                 <FiFileText className="text-xl" /> Terms
               </a>
             </motion.div>
@@ -170,7 +173,7 @@ const Footer = () => {
             <motion.h3 variants={itemVariants} className="text-2xl font-bold tracking-tight flex items-center justify-center gap-2 mb-4">
               <FiMail className="text-red-500" /> Stay Activated
             </motion.h3>
-            <motion.p variants={itemVariants} className="text-gray-600 leading-relaxed max-w-xs mb-4">
+            <motion.p variants={itemVariants} className="text-black leading-relaxed max-w-xs mb-4">
               Launch alerts and exclusives straight to your inbox.
             </motion.p>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 max-w-md mx-auto">
@@ -178,7 +181,7 @@ const Footer = () => {
                 type="email" 
                 placeholder="your@email.com" 
                 {...register('email', { required: 'Email is required' })}
-                className={`flex-1 px-4 py-3 rounded-full border border-gray-300 text-gray-800 placeholder-gray-500 focus:border-red-500 focus:outline-none transition-all duration-300 text-sm ${
+                className={`flex-1 px-4 py-3 rounded-full border border-black text-black placeholder-black focus:border-red-500 focus:outline-none transition-all duration-300 text-sm ${
                   errors.email ? 'border-red-500 shake' : ''
                 }`} 
               />
@@ -195,7 +198,7 @@ const Footer = () => {
           </motion.div>
         </div>
 
-        <div className="border-t border-gray-200 pt-8 relative z-10">
+        <div className="border-t border-black pt-8 relative z-10">
           <motion.div 
             className="bg-black rounded-2xl p-8 text-center relative overflow-hidden mb-8"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -277,7 +280,7 @@ const Footer = () => {
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-center text-gray-500 text-sm tracking-wide relative z-10"
+          className="text-center text-black text-sm tracking-wide relative z-10"
         >
           &copy; 2025 Activate Supplement. Fuel Your Potential. All rights reserved.
         </motion.p>
