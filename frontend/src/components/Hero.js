@@ -1,4 +1,4 @@
-// src/components/Hero.js (Epic Polish: Pulsing Gradient Glow, Icon-Infused Particles, Mobile Magic)
+// src/components/Hero.js (Professional Polish: Apple-Inspired, Minimal Particles, Full Visibility with CTA Buttons)
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -8,16 +8,15 @@ const Hero = () => {
   const canvasRef = useRef(null);
   const particles = useRef([]);
 
-  const createParticle = (x, y, isIcon = false) => ({
+  const createParticle = (x, y) => ({
     x,
     y,
-    vx: (Math.random() - 0.5) * 6,
-    vy: (Math.random() - 0.5) * 6,
-    size: Math.random() * 4 + 2,
-    color: `hsl(${Math.random() * 60 + 20}, 100%, ${50 + Math.random() * 50}%)`,
+    vx: (Math.random() - 0.5) * 2, // Reduced speed for subtlety
+    vy: (Math.random() - 0.5) * 2,
+    size: Math.random() * 2 + 1, // Smaller particles
+    color: `hsl(${Math.random() * 60 + 20}, 70%, 80%)`, // Softer colors
     life: 1,
-    decay: Math.random() * 0.015 + 0.005,
-    isIcon,
+    decay: Math.random() * 0.01 + 0.005,
   });
 
   useEffect(() => {
@@ -45,13 +44,13 @@ const Hero = () => {
       };
     };
     const handleScroll = throttle(() => {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 3; i++) { // Reduced particle spawn rate
         particles.current.push(createParticle(
           Math.random() * canvas.width,
           Math.random() * canvas.height * 0.3
         ));
       }
-    }, 200);
+    }, 300);
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     const animate = () => {
@@ -61,15 +60,12 @@ const Hero = () => {
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.life;
-        ctx.shadowBlur = 5; // Reduced blur for performance
-        ctx.shadowColor = p.color;
         ctx.fill();
-        ctx.shadowBlur = 0;
 
         p.x += p.vx;
         p.y += p.vy;
         p.life -= p.decay;
-        p.size *= 0.99;
+        p.size *= 0.98;
 
         return p.life > 0 && p.size > 0.5 && p.x > 0 && p.x < canvas.width && p.y < canvas.height;
       });
@@ -79,7 +75,7 @@ const Hero = () => {
     animate();
 
     setTimeout(() => {
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 10; i++) { // Reduced initial particles
         particles.current.push(createParticle(canvas.width / 2, canvas.height / 2));
       }
     }, 500);
@@ -91,90 +87,63 @@ const Hero = () => {
     };
   }, []);
 
-  const burstParticles = (e, isIcon = false) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = rect.left + rect.width / 2 + window.scrollX;
-    const y = rect.top + rect.height / 2 + window.scrollY;
-    for (let i = 0; i < 20; i++) { // Reduced from 50 to 20
-      setTimeout(() => {
-        particles.current.push(createParticle(x, y, isIcon));
-      }, i * 5);
-    }
-  };
-
   return (
-    <section className="hero relative overflow-hidden min-h-screen flex items-center justify-center">
+    <section className="hero relative overflow-hidden min-h-screen bg-gray-900">
       <canvas ref={canvasRef} id="particles-canvas" className="absolute inset-0" />
       <div className="parallax-bg absolute inset-0 z-0" 
            style={{ 
              backgroundImage: 'ur[](https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)', 
-             transform: `translateY(${window.scrollY * 0.3}px)` 
+             backgroundSize: 'cover', 
+             backgroundPosition: 'center', 
+             opacity: 0.7, // Subtle image overlay
+             transform: `translateY(${window.scrollY * 0.2}px)` // Slower parallax
            }} 
       />
-      <div className="max-w-7xl mx-auto px-4 text-center relative z-10 py-8 w-full">
-        <motion.h1
-          initial={{ opacity: 0, y: 50, scale: 0.95 }}
-          animate={{ 
-            opacity: 1, 
-            y: 0, 
-            scale: 1,
-            color: [
-              '#dc3545',
-              '#fd7e14',
-              '#ffc107',
-              '#dc3545'
-            ]
-          }}
-          transition={{ 
-            duration: 1.2, 
-            ease: [0.22, 1, 0.36, 1],
-            color: { duration: 3, repeat: Infinity, ease: 'easeInOut' }
-          }}
-          className="text-4xl md:text-7xl font-bold mb-4 leading-tight bg-clip-text text-transparent"
-          style={{ 
-            background: 'linear-gradient(135deg, #dc3545 0%, #fd7e14 50%, #ffc107 100%)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            textShadow: '0 0 30px rgba(220,53,69,0.6), 0 0 60px rgba(253,126,20,0.4)' 
-          }}
-        >
-          Unlock <span className="animate-pulse">Instant</span> Energy
-          <br />
-          That <span className="animate-pulse">Lasts</span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed text-white/95 font-light"
-        >
-          Breathe deeper. Flow stronger. Think sharper. Activate delivers science-backed boosts to your core systems—pre-launch exclusive for early adopters like you.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-        >
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link 
-              to="/shop" 
-              className="btn text-lg pulse inline-flex items-center gap-2" 
-              onClick={(e) => burstParticles(e, true)}
-            >
-              <FaFire className="text-xs animate-bounce" /> Join the Waitlist Now
-            </Link>
+      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-16">
+        <div className="text-center max-w-4xl">
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
+            style={{ 
+              textShadow: '0 2px 4px rgba(0,0,0,0.3)' // Subtle shadow for readability
+            }}
+          >
+            Unlock Instant Energy
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed"
+          >
+            Science-backed boosts for breath, focus, and flow. Join 5,000+ early adopters for exclusive pre-launch access.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link 
+                to="/shop" 
+                className="cta-btn text-lg pulse inline-flex items-center gap-2" // Changed from btn to cta-btn
+              >
+                <FaFire className="text-xs animate-bounce" /> Join Waitlist
+              </Link>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link 
+                to="#benefits" 
+                className="cta-btn text-lg inline-flex items-center gap-2" // Changed from btn-outline to cta-btn
+              >
+                Learn More <FaFire className="text-xs ml-1 opacity-70" />
+              </Link>
+            </motion.div>
           </motion.div>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link 
-              to="#benefits" 
-              className="btn-outline text-lg inline-flex items-center gap-2" 
-              onClick={(e) => burstParticles(e)}
-            >
-              Discover How It Works <FaFire className="text-xs ml-1 opacity-70" />
-            </Link>
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
