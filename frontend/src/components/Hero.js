@@ -1,4 +1,4 @@
-// src/components/Hero.js (Parallax Layer + Canvas Particle Burst - Fixed Scoping)
+// src/components/Hero.js (Parallax Layer + Canvas Particle Burst - Fixed Scoping + Gradient Text)
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -8,7 +8,7 @@ const Hero = () => {
   const particles = useRef([]);
 
   // Move createParticle outside useEffect for scope access
-  const createParticle = (x, y, ctx) => ({
+  const createParticle = (x, y) => ({  // Removed unused ctx param
     x,
     y,
     vx: (Math.random() - 0.5) * 4,
@@ -67,7 +67,7 @@ const Hero = () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []); // Removed particles dep since it's stable
+  }, []);
 
   const burstParticles = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -89,12 +89,18 @@ const Hero = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-bold mb-4 leading-tight text-white"
-          style={{ textShadow: '0 0 20px rgba(220,53,69,0.5)' }}
+          className="text-4xl md:text-6xl font-bold mb-4 leading-tight"
+          style={{ 
+            background: 'linear-gradient(135deg, #dc3545 0%, #fd7e14 50%, #ffc107 100%)', // Fiery red-gold gradient
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            textShadow: '0 0 20px rgba(220,53,69,0.5)' 
+          }}
         >
-          Unlock <span className="text-yellow-300">Instant</span> Energy
+          Unlock <span>Instant</span> Energy
           <br />
-          That <span className="text-yellow-300">Lasts</span>
+          That <span>Lasts</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 50 }}

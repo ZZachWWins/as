@@ -1,4 +1,4 @@
-// src/components/Testimonials.js (New: Credibility Booster + Stagger)
+// src/components/Testimonials.js (New: Credibility Booster + Stagger on Grid)
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -18,32 +18,30 @@ const testimonials = [
 ];
 
 const Testimonials = () => (
-  <section className="testimonials">
-    <div className="max-w-7xl mx-auto px-4">
-      <motion.h2 
-        initial={{ opacity: 0, y: 20 }} 
-        whileInView={{ opacity: 1, y: 0 }} 
-        className="text-4xl font-bold text-center mb-12 text-gray-800"
-      >
-        What Early Testers Are Saying
-      </motion.h2>
-      <div className="testimonial-grid stagger-children" whileInView={{ className: 'stagger-children animate' }} viewport={{ once: true }}>
-        {testimonials.map((testimonial, index) => (
-          <motion.div 
-            key={index}
-            initial={{ opacity: 0, x: -20 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            transition={{ delay: index * 0.1 }}
-            whileHover={{ scale: 1.02 }}
-            className="testimonial"
-          >
-            <p className="text-gray-700 mb-4">"{testimonial.quote}"</p>
-            <p className="testimonial-author">— {testimonial.author}</p>
-          </motion.div>
-        ))}
-      </div>
+  <>
+    <motion.h2 
+      initial={{ opacity: 0, y: 20 }} 
+      whileInView={{ opacity: 1, y: 0 }} 
+      className="text-4xl font-bold text-center mb-12 text-gray-800"
+    >
+      What Early Testers Are Saying
+    </motion.h2>
+    <div className="testimonial-grid stagger-children" whileInView={{ className: 'stagger-children animate' }} viewport={{ once: true }}>
+      {testimonials.map((testimonial, index) => (
+        <motion.div 
+          key={index}
+          initial={{ opacity: 0, x: -20 }} 
+          whileInView={{ opacity: 1, x: 0 }} 
+          transition={{ delay: index * 0.1 }}
+          whileHover={{ scale: 1.02 }}
+          className="testimonial"
+        >
+          <p className="text-gray-700 mb-4">"{testimonial.quote}"</p>
+          <p className="testimonial-author">— {testimonial.author}</p>
+        </motion.div>
+      ))}
     </div>
-  </section>
+  </>
 );
 
 export default Testimonials;

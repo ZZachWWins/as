@@ -30,57 +30,55 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <section className="testimonials-faq py-20 bg-gradient-to-b from-white to-red-50"> {/* Testimonials-like BG */}
-      <div className="max-w-7xl mx-auto px-4">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }} 
-          whileInView={{ opacity: 1, y: 0 }} 
-          className="text-4xl font-bold text-center mb-12 text-gray-800"
-        >
-          Frequently Asked Questions
-        </motion.h2>
-        <div className="faq-grid stagger-children" whileInView={{ className: 'stagger-children animate' }} viewport={{ once: true }}> {/* Mirror testimonial-grid */}
-          {faqs.map((faq, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, x: -20 }} 
-              whileInView={{ opacity: 1, x: 0 }} 
-              transition={{ delay: index * 0.1 }}
-              className="faq-card" // Mirror testimonial
+    <>
+      <motion.h2 
+        initial={{ opacity: 0, y: 20 }} 
+        whileInView={{ opacity: 1, y: 0 }} 
+        className="text-4xl font-bold text-center mb-12 text-gray-800"
+      >
+        Frequently Asked Questions
+      </motion.h2>
+      <div className="faq-grid stagger-children" whileInView={{ className: 'stagger-children animate' }} viewport={{ once: true }}> {/* Mirror testimonial-grid */}
+        {faqs.map((faq, index) => (
+          <motion.div 
+            key={index}
+            initial={{ opacity: 0, x: -20 }} 
+            whileInView={{ opacity: 1, x: 0 }} 
+            transition={{ delay: index * 0.1 }}
+            className="faq-card" // Mirror testimonial
+          >
+            <button
+              onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              className="w-full text-left p-6 font-bold text-gray-800 hover:bg-red-50/50 transition-colors flex justify-between items-center border-l-4 border-red-500" // Red left border like testimonial
             >
-              <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full text-left p-6 font-bold text-gray-800 hover:bg-red-50/50 transition-colors flex justify-between items-center border-l-4 border-red-500" // Red left border like testimonial
+              <span className="text-lg pr-4">{faq.question}</span> {/* Bold question like author */}
+              <motion.span 
+                animate={{ rotate: openIndex === index ? 180 : 0 }} 
+                transition={{ duration: 0.3 }}
+                className="text-red-500"
               >
-                <span className="text-lg pr-4">{faq.question}</span> {/* Bold question like author */}
-                <motion.span 
-                  animate={{ rotate: openIndex === index ? 180 : 0 }} 
+                <ChevronDown className="w-5 h-5" />
+              </motion.span>
+            </button>
+            <AnimatePresence>
+              {openIndex === index && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="text-red-500"
+                  className="overflow-hidden"
                 >
-                  <ChevronDown className="w-5 h-5" />
-                </motion.span>
-              </button>
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <p className="p-6 italic text-gray-700 border-t border-gray-100 leading-relaxed"> {/* Italic like quote */}
-                      {faq.answer}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
-        </div>
+                  <p className="p-6 italic text-gray-700 border-t border-gray-100 leading-relaxed"> {/* Italic like quote */}
+                    {faq.answer}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
       </div>
-    </section>
+    </>
   );
 };
 
