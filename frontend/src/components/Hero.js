@@ -1,4 +1,4 @@
-// src/components/Hero.js (Professional Polish: Apple-Inspired, Persistent Particles, Logo Overlay, Centered CTA with Gradient Text)
+// src/components/Hero.js (Professional Polish: Apple-Inspired, Persistent Particles, Logo Overlay, Centered CTA with Subtle Gradient Text)
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -126,22 +126,14 @@ const Hero = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-12" // Increased mb-12 for spacing
             style={{ 
               color: 'white', // Explicitly set white text
               textShadow: `
                 -1px -1px 0 #ff0000,
                 1px -1px 0 #ffaa00,
                 -1px 1px 0 #ffaa00,
-                1px 1px 0 #00aaff,
-                -2px -2px 0 #ff0000,
-                2px -2px 0 #ffaa00,
-                -2px 2px 0 #ffaa00,
-                2px 2px 0 #00aaff,
-                -3px -3px 0 #ff0000,
-                3px -3px 0 #ffaa00,
-                -3px 3px 0 #ffaa00,
-                3px 3px 0 #00aaff` // Gradient outline effect
+                1px 1px 0 #00aaff` // Reduced layers for lighter outline
             }}
           >
             Unlock Instant Energy
@@ -150,18 +142,14 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-white mb-16 max-w-2xl mx-auto leading-relaxed" // Increased mb-16, changed to white
             style={{ 
               color: 'white', // Explicitly set white text
               textShadow: `
                 -1px -1px 0 #ff0000,
                 1px -1px 0 #ffaa00,
                 -1px 1px 0 #ffaa00,
-                1px 1px 0 #00aaff,
-                -2px -2px 0 #ff0000,
-                2px -2px 0 #ffaa00,
-                -2px 2px 0 #ffaa00,
-                2px 2px 0 #00aaff` // Gradient outline effect
+                1px 1px 0 #00aaff` // Reduced layers for lighter outline
             }}
           >
             Science-backed boosts for breath, focus, and flow. Join 5,000+ early adopters for exclusive pre-launch access.
@@ -170,24 +158,26 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center" // Increased gap and centered
+            className="flex justify-center items-center h-32" // Fixed height container for vertical centering
           >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link 
-                to="/shop" 
-                className="cta-btn text-lg pulse inline-flex items-center gap-2"
-              >
-                <FaFire className="text-xs animate-bounce" /> Join Waitlist
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link 
-                to="#benefits" 
-                className="cta-btn text-lg inline-flex items-center gap-2"
-              >
-                Learn More <FaFire className="text-xs ml-1 opacity-70" />
-              </Link>
-            </motion.div>
+            <div className="flex flex-col sm:flex-row gap-6">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  to="/shop" 
+                  className="cta-btn text-lg pulse inline-flex items-center gap-2"
+                >
+                  <FaFire className="text-xs animate-bounce" /> Join Waitlist
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  to="#benefits" 
+                  className="cta-btn text-lg inline-flex items-center gap-2"
+                >
+                  Learn More <FaFire className="text-xs ml-1 opacity-70" />
+                </Link>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
