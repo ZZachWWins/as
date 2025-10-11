@@ -246,7 +246,7 @@ footer {
   background: rgba(0, 0, 0, 0.7); /* Darker glassmorphism base */
   backdrop-filter: blur(20px); 
   color: #333; /* Dark text for readability */
-  py-16: padding: 4rem 0; 
+  padding: 4rem 0; /* Corrected from py-16: */
   border-top: 1px solid rgba(220,53,69,0.1); 
   box-shadow: 0 -4px 20px rgba(0,0,0,0.2); 
 }
