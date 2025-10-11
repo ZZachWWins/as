@@ -59,7 +59,7 @@ const Hero = () => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
-        ctx.globalAlpha = p.life;
+        ctx.globalAlpha = p.life * 0.5; // Reduced opacity for subtlety
         ctx.fill();
 
         p.x += p.vx;
@@ -88,26 +88,26 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero relative overflow-hidden min-h-screen bg-gray-900">
+    <section className="hero relative overflow-hidden min-h-screen">
       <canvas ref={canvasRef} id="particles-canvas" className="absolute inset-0" />
       <div className="parallax-bg absolute inset-0 z-0" 
            style={{ 
              backgroundImage: 'ur[](https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80)', 
              backgroundSize: 'cover', 
              backgroundPosition: 'center', 
-             opacity: 0.7, // Subtle image overlay
+             opacity: 0.5, // Reduced opacity to improve text visibility
              transform: `translateY(${window.scrollY * 0.2}px)` // Slower parallax
            }} 
       />
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-4 py-16">
+      <div className="relative z-10 flex items-center justify-center h-screen pt-40 pb-16 px-4"> {/* Increased pt-40, used h-screen for full height */}
         <div className="text-center max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-100 leading-tight mb-6" // Changed to gray-100 for better contrast
             style={{ 
-              textShadow: '0 2px 4px rgba(0,0,0,0.3)' // Subtle shadow for readability
+              textShadow: '0 2px 6px rgba(0,0,0,0.5)' // Stronger shadow for readability
             }}
           >
             Unlock Instant Energy
@@ -116,7 +116,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed" // Changed to gray-300 for contrast
           >
             Science-backed boosts for breath, focus, and flow. Join 5,000+ early adopters for exclusive pre-launch access.
           </motion.p>
@@ -129,7 +129,7 @@ const Hero = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link 
                 to="/shop" 
-                className="cta-btn text-lg pulse inline-flex items-center gap-2" // Changed from btn to cta-btn
+                className="cta-btn text-lg pulse inline-flex items-center gap-2"
               >
                 <FaFire className="text-xs animate-bounce" /> Join Waitlist
               </Link>
@@ -137,7 +137,7 @@ const Hero = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link 
                 to="#benefits" 
-                className="cta-btn text-lg inline-flex items-center gap-2" // Changed from btn-outline to cta-btn
+                className="cta-btn text-lg inline-flex items-center gap-2"
               >
                 Learn More <FaFire className="text-xs ml-1 opacity-70" />
               </Link>
