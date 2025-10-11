@@ -1,19 +1,11 @@
-// src/components/Header.js (Updated: No Hamburger/Menu - Full Nav Links on Mobile Too, Responsive Layout)
-import React, { useEffect, useState } from 'react';
+// src/components/Header.js (Updated: No Hamburger/Menu - Full Nav Links on Mobile Too, Responsive Layout - ESLint Fix: Removed Unused isMobile)
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiHome, FiShoppingBag, FiUsers } from 'react-icons/fi'; // npm i react-icons
 
 const Header = () => {
   const location = useLocation();
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Initial check (kept for potential future use)
-
-  // Listen for resize to toggle mobile/desktop (kept for potential future use)
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const navItems = [
     { to: '/', icon: <FiHome />, label: 'Home' },
@@ -45,7 +37,7 @@ const Header = () => {
               {item.to ? (
                 <Link 
                   to={item.to} 
-                  className={`flex items-center gap-2 transition-all duration-300 text-sm md:text-base ${
+                  className={`relative flex items-center gap-2 transition-all duration-300 text-sm md:text-base ${
                     location.pathname === item.to ? 'font-bold text-red-500' : 'text-gray-700 hover:text-red-500'
                   }`}
                 >
