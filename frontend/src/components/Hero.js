@@ -34,7 +34,6 @@ const Hero = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    let lastScrollTime = 0;
     const throttle = (func, limit) => {
       let inThrottle;
       return (...args) => {
