@@ -1,4 +1,4 @@
-// src/components/Hero.js (Parallax Layer + Canvas Particle Burst)
+// src/components/Hero.js (Parallax Layer + Canvas Particle Burst - Fixed Scoping)
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -6,6 +6,18 @@ import { motion } from 'framer-motion';
 const Hero = () => {
   const canvasRef = useRef(null);
   const particles = useRef([]);
+
+  // Move createParticle outside useEffect for scope access
+  const createParticle = (x, y, ctx) => ({
+    x,
+    y,
+    vx: (Math.random() - 0.5) * 4,
+    vy: (Math.random() - 0.5) * 4,
+    size: Math.random() * 3 + 1,
+    color: `hsl(${Math.random() * 60 + 20}, 100%, 50%)`, // Fiery oranges/reds
+    life: 1,
+    decay: Math.random() * 0.02 + 0.01,
+  });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -20,17 +32,6 @@ const Hero = () => {
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
-
-    const createParticle = (x, y) => ({
-      x,
-      y,
-      vx: (Math.random() - 0.5) * 4,
-      vy: (Math.random() - 0.5) * 4,
-      size: Math.random() * 3 + 1,
-      color: `hsl(${Math.random() * 60 + 20}, 100%, 50%)`, // Fiery oranges/reds
-      life: 1,
-      decay: Math.random() * 0.02 + 0.01,
-    });
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -66,7 +67,7 @@ const Hero = () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, []); // Removed particles dep since it's stable
 
   const burstParticles = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
