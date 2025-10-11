@@ -1,4 +1,4 @@
-// src/components/Footer.js (Modern Sleek: Gradient Circles, Frosted Glass, Fluid Elements, Form Glow)
+// src/components/Footer.js (Modern Sleek: Gradient Circles, Full Footer Fluid, Frosted Glass, Form Glow)
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -40,25 +40,25 @@ const Footer = () => {
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = 100; // Fixed height for fluid layer
+      canvas.height = 200; // Full footer height approximation
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
     const blobs = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       blobs.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        radius: Math.random() * 50 + 20,
+        x: Math.random() * canvas.width * 0.5, // Start in left half
+        y: canvas.height - Math.random() * 50, // Near bottom
+        vx: (Math.random() - 0.3) * 0.3, // Slower horizontal movement
+        vy: (Math.random() - 0.5) * 0.2, // Slight vertical drift
+        radius: Math.random() * 60 + 30, // Larger blobs
       });
     }
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Subtle background tint
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       blobs.forEach(blob => {
@@ -76,8 +76,9 @@ const Footer = () => {
 
         blob.x += blob.vx;
         blob.y += blob.vy;
-        if (blob.x < 0 || blob.x > canvas.width) blob.vx *= -1;
-        if (blob.y < 0 || blob.y > canvas.height) blob.vy *= -1;
+        if (blob.x < 0) blob.x = 0;
+        if (blob.x > canvas.width * 0.5) blob.x = canvas.width * 0.5; // Confine to left half
+        if (blob.y < canvas.height - 100 || blob.y > canvas.height) blob.vy *= -1; // Bounce vertically
       });
 
       animationFrameId = requestAnimationFrame(animate);
@@ -99,7 +100,7 @@ const Footer = () => {
       variants={columnVariants}
       animate="visible"
     >
-      <canvas ref={canvasRef} className="absolute bottom-0 left-0 w-full h-24 z-0 pointer-events-none" />
+      <canvas ref={canvasRef} className="absolute bottom-0 left-0 w-full h-full z-0 pointer-events-none" style={{ height: '100%' }} />
       <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-yellow-500 opacity-50"></div>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-12 justify-items-center">
