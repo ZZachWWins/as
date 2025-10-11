@@ -1,27 +1,19 @@
-// src/components/Header.js (Fixed: Conditional Mobile Rendering for Burger - No Desktop Visibility)
-import React, { useState, useEffect } from 'react';
+// src/components/Header.js (Updated: No Hamburger/Menu - Full Nav Links on Mobile Too, Responsive Layout)
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
-import { slide as Menu } from 'react-burger-menu'; // npm i react-burger-menu
-import { FiHome, FiShoppingBag, FiUsers, FiMenu, FiX } from 'react-icons/fi'; // npm i react-icons
+import { motion } from 'framer-motion';
+import { FiHome, FiShoppingBag, FiUsers } from 'react-icons/fi'; // npm i react-icons
 
 const Header = () => {
   const location = useLocation();
-  const [isOpen, setIsOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Initial check
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Initial check (kept for potential future use)
 
-  // Listen for resize to toggle mobile/desktop
+  // Listen for resize to toggle mobile/desktop (kept for potential future use)
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  const menuVariants = {
-    hidden: { x: '-100%' },
-    visible: { x: 0 },
-    exit: { x: '-100%' },
-  };
 
   const navItems = [
     { to: '/', icon: <FiHome />, label: 'Home' },
@@ -36,9 +28,9 @@ const Header = () => {
       className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg z-50 border-b border-red-100"
       style={{ transform: `translateY(${Math.max(0, window.scrollY * 0.1)}px)` }} // Subtle parallax
     >
-      {/* Desktop Nav - No Burger Here */}
-      <nav className="max-w-7xl mx-auto px-4 py-4 hidden md:flex justify-between items-center">
-        <Link to="/">
+      {/* Unified Nav: Full Links on All Screens, Responsive (Wraps/Squeezes on Mobile) */}
+      <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 md:gap-0">
+        <Link to="/" className="flex-shrink-0">
           <motion.img 
             src="https://res.cloudinary.com/deheojfkt/image/upload/Untitled_512_x_512_px_sdrcsv.png" 
             alt="Activate" 
@@ -47,13 +39,13 @@ const Header = () => {
             transition={{ type: "spring", stiffness: 300 }} 
           />
         </Link>
-        <div className="flex items-center space-x-8">
+        <div className="flex flex-wrap justify-center md:justify-start items-center space-x-0 md:space-x-8 space-y-2 md:space-y-0 gap-2 md:gap-8">
           {navItems.map((item, i) => (
             <motion.div key={i} whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.95 }}>
               {item.to ? (
                 <Link 
                   to={item.to} 
-                  className={`flex items-center gap-2 transition-all duration-300 ${
+                  className={`flex items-center gap-2 transition-all duration-300 text-sm md:text-base ${
                     location.pathname === item.to ? 'font-bold text-red-500' : 'text-gray-700 hover:text-red-500'
                   }`}
                 >
@@ -61,7 +53,7 @@ const Header = () => {
                   {item.label}
                 </Link>
               ) : (
-                <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
+                <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white px-3 py-1 rounded-full text-xs md:text-sm font-bold flex items-center gap-1">
                   <FiUsers className="text-xs" />
                   {item.label}
                 </div>
@@ -70,70 +62,6 @@ const Header = () => {
           ))}
         </div>
       </nav>
-
-      {/* Mobile Nav - Conditionally Rendered Only on Mobile */}
-      {isMobile && (
-        <Menu
-          isOpen={isOpen}
-          onStateChange={(state) => setIsOpen(state.isOpen)}
-          customBurgerIcon={<FiMenu className="text-2xl text-red-500" />}
-          customCrossIcon={<FiX className="text-2xl text-red-500" />}
-          pageWrapId="page-wrap"
-          outerContainerId="outer-container"
-          width="280"  // Compact sidebar
-          noOverlay={true}  // No full-screen backdrop—pure drawer
-          disableOverlayClick={true}  // No close on outside (use cross)
-          burgerBarClassName="bg-red-500"
-          burgerButtonClassName="ml-4"
-          crossButtonClassName="ml-4"
-          itemClassName="text-gray-700 hover:text-red-500 border-l-4 border-transparent hover:border-red-500 pl-4 py-2"
-          styles={{
-            bmMenu: {
-              background: '#fff',
-              padding: '2rem 1rem',
-              boxShadow: '2px 0 20px rgba(0,0,0,0.1)',
-              borderRight: '1px solid #e5e7eb', // Subtle edge
-            },
-            bmItem: {
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-            },
-          }}
-        >
-          <AnimatePresence mode="wait">
-            {navItems.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={menuVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                transition={{ delay: i * 0.1 }}
-                className="py-2 cursor-pointer"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.to ? (
-                  <Link 
-                    to={item.to} 
-                    className={`flex items-center gap-2 transition-all duration-300 ${
-                      location.pathname === item.to ? 'font-bold text-red-500' : 'text-gray-700 hover:text-red-500'
-                    }`}
-                  >
-                    {item.icon}
-                    {item.label}
-                  </Link>
-                ) : (
-                  <div className="bg-gradient-to-r from-red-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-bold flex items-center gap-1">
-                    <FiUsers className="text-xs" />
-                    {item.label}
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </Menu>
-      )}
     </motion.header>
   );
 };
