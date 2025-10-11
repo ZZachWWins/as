@@ -1,4 +1,4 @@
-// src/components/Header.js (Ultimate: Mobile Burger, Icon Nav, Scroll Parallax - Fixed Menu Width)
+// src/components/Header.js (Ultimate: Mobile Burger, Icon Nav, Scroll Parallax - No Overlay, Desktop-Free)
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -28,7 +28,7 @@ const Header = () => {
       className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg z-50 border-b border-red-100"
       style={{ transform: `translateY(${Math.max(0, window.scrollY * 0.1)}px)` }} // Subtle parallax
     >
-      {/* Desktop Nav */}
+      {/* Desktop Nav - No Burger Here */}
       <nav className="max-w-7xl mx-auto px-4 py-4 hidden md:flex justify-between items-center">
         <Link to="/">
           <motion.img 
@@ -63,8 +63,8 @@ const Header = () => {
         </div>
       </nav>
 
-      {/* Mobile Nav - Constrained Sidebar */}
-      <div className="md:hidden relative">
+      {/* Mobile Nav - Sidebar Only, No Overlay */}
+      <div className="md:hidden">
         <Menu
           isOpen={isOpen}
           onStateChange={(state) => setIsOpen(state.isOpen)}
@@ -72,8 +72,9 @@ const Header = () => {
           customCrossIcon={<FiX className="text-2xl text-red-500" />}
           pageWrapId="page-wrap"
           outerContainerId="outer-container"
-          width="280"  // Fixed: Compact sidebar, not full-screen
-          overlayClassName="bg-black/50 backdrop-blur-sm"  // Subtle fade, not opaque block
+          width="280"  // Compact sidebar
+          noOverlay={true}  // Fixed: No full-screen backdrop—pure drawer
+          disableOverlayClick={true}  // No close on outside (use cross)
           burgerBarClassName="bg-red-500"
           burgerButtonClassName="ml-4"
           crossButtonClassName="ml-4"
@@ -83,6 +84,7 @@ const Header = () => {
               background: '#fff',
               padding: '2rem 1rem',
               boxShadow: '2px 0 20px rgba(0,0,0,0.1)',
+              borderRight: '1px solid #e5e7eb', // Subtle edge
             },
             bmItem: {
               display: 'flex',
@@ -100,7 +102,7 @@ const Header = () => {
                 animate="visible"
                 exit="exit"
                 transition={{ delay: i * 0.1 }}
-                className="py-2"
+                className="py-2 cursor-pointer"
                 onClick={() => setIsOpen(false)}
               >
                 {item.to ? (
