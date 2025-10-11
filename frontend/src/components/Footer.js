@@ -1,4 +1,4 @@
-// src/components/Footer.js (Modern Sleek: Light Theme, Gradient Buttons on Links, Centered, Form Glow)
+// src/components/Footer.js (Modern Sleek: Light Theme, Gradient Underline on Hover, Centered, Form Glow)
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -48,12 +48,12 @@ const Footer = () => {
             </motion.h3>
             <nav className="space-y-3">
               <motion.div variants={itemVariants}>
-                <Link to="/" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group">
+                <Link to="/" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group" style={{ textDecoration: 'none' }}>
                   <FiHome className="text-sm opacity-70 group-hover:opacity-100" /> Home
                 </Link>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <Link to="/shop" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group">
+                <Link to="/shop" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group" style={{ textDecoration: 'none' }}>
                   <FiShoppingBag className="text-sm opacity-70 group-hover:opacity-100" /> Shop
                 </Link>
               </motion.div>
@@ -68,10 +68,10 @@ const Footer = () => {
               Fuel your potential with science-backed energy boosts that last.
             </motion.p>
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-sm justify-center lg:justify-start">
-              <a href="/privacy-policy" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group">
+              <a href="/privacy-policy" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group" style={{ textDecoration: 'none' }}>
                 <FiShield className="text-xs" /> Privacy
               </a>
-              <a href="/terms-of-service" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group">
+              <a href="/terms-of-service" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group" style={{ textDecoration: 'none' }}>
                 <FiFileText className="text-xs" /> Terms
               </a>
             </motion.div>
@@ -97,7 +97,7 @@ const Footer = () => {
                 type="submit" 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="cta-btn px-6 py-3 font-semibold transition-all duration-300 shadow-lg flex items-center justify-center gap-1 text-white text-sm" // Changed from btn to cta-btn
+                className="cta-btn px-6 py-3 font-semibold transition-all duration-300 shadow-lg flex items-center justify-center gap-1 text-white text-sm"
               >
                 Join <FiArrowRight className="text-xs" />
               </motion.button>
@@ -115,7 +115,7 @@ const Footer = () => {
           >
             <motion.a 
               href="mailto:hello@activatesupplement.com" 
-              className="text-gray-600 hover:text-red-500 transition-all duration-300 text-2xl p-3 rounded-lg hover:bg-red-50"
+              className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 text-2xl p-3 rounded-lg hover:bg-red-50" style={{ textDecoration: 'none' }}
               whileHover={{ rotate: 360, scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -125,7 +125,7 @@ const Footer = () => {
               href="https://twitter.com/activate_supplement" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-gray-600 hover:text-red-500 transition-all duration-300 text-2xl p-3 rounded-lg hover:bg-red-50"
+              className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 text-2xl p-3 rounded-lg hover:bg-red-50" style={{ textDecoration: 'none' }}
               whileHover={{ rotate: 360, scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -135,7 +135,7 @@ const Footer = () => {
               href="https://facebook.com/activate_supplement" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-gray-600 hover:text-red-500 transition-all duration-300 text-2xl p-3 rounded-lg hover:bg-red-50"
+              className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 text-2xl p-3 rounded-lg hover:bg-red-50" style={{ textDecoration: 'none' }}
               whileHover={{ rotate: 360, scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >

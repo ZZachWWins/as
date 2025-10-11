@@ -29,6 +29,7 @@ body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; overflow
 .shadow-lg { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
 .shadow-xl { box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
 .transition { transition: all 0.3s ease; }
+a { text-decoration: none; } /* Remove default underline from all links */
 
 /* Logo Enhanced */
 .logo-image { height: 50px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); border-radius: 8px; cursor: pointer; }

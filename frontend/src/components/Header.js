@@ -38,7 +38,7 @@ const Header = () => {
                   to={item.to} 
                   className={`btn-outline relative flex items-center gap-2 transition-all duration-300 text-sm md:text-base ${
                     location.pathname === item.to ? 'font-bold' : ''
-                  }`}
+                  }`} style={{ textDecoration: 'none' }}
                 >
                   {item.icon}
                   {item.label}
