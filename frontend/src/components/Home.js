@@ -1,8 +1,8 @@
-// src/components/Home.js (Symphonic Polish: Variants Orchestra, Icon Headers, Infinite Scroll Delight)
+// src/components/Home.js (Symphonic Polish: Variants Orchestra, Icon Headers, Infinite Scroll Delight - Fixed ESLint)
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
-import { FaFire, FaChartLine, FaQuoteLeft, FaQuestionCircle, FaRocket } from 'react-icons/fa'; // react-icons/fa
+import { FaFire, FaChartLine, FaQuestionCircle, FaRocket } from 'react-icons/fa'; // Removed unused FaQuoteLeft
 import Hero from './Hero';
 import Benefits from './Benefits';
 import Testimonials from './Testimonials';
