@@ -1,4 +1,4 @@
-// src/components/Hero.js (Professional Polish: Apple-Inspired, Persistent Particles, Full Visibility with CTA Buttons)
+// src/components/Hero.js (Professional Polish: Apple-Inspired, Persistent Particles, Logo Overlay, Full Visibility with CTA Buttons)
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -56,7 +56,7 @@ const Hero = () => {
     const spawnInterval = setInterval(spawnParticles, 200); // Spawn every 200ms
 
     const handleScroll = throttle(() => {
-      for (let i = 0; i < 2; i++) { // Reduced but active on scroll
+      for (let i = 0; i < 2; i++) { // Active on scroll
         particles.current.push(createParticle(
           Math.random() * canvas.width,
           Math.random() * canvas.height * 0.3
@@ -87,14 +87,14 @@ const Hero = () => {
     animate();
 
     // Increased initial particles for always-on effect
-    for (let i = 0; i < 30; i++) { // Increased from 10
+    for (let i = 0; i < 30; i++) {
       particles.current.push(createParticle(canvas.width / 2, canvas.height / 2));
     }
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('scroll', handleScroll);
-      clearInterval(spawnInterval); // Clean up interval
+      clearInterval(spawnInterval);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
@@ -111,8 +111,17 @@ const Hero = () => {
              transform: `translateY(${window.scrollY * 0.2}px)` // Slower parallax
            }} 
       />
-      <div className="relative z-10 flex items-center justify-center h-screen pt-48 pb-16 px-4"> {/* Increased pt-48 to 12rem */}
+      <div className="relative z-10 flex items-start justify-center h-screen pt-64 pb-16 px-4"> {/* Increased pt-64 to 16rem */}
         <div className="text-center max-w-4xl">
+          {/* Logo Overlay */}
+          <motion.img
+            src="https://res.cloudinary.com/deheojfkt/image/upload/Untitled_512_x_512_px_sdrcsv.png"
+            alt="Activate Logo"
+            className="absolute top-16 left-1/2 transform -translate-x-1/2 w-32 h-auto opacity-80" // Centered, semi-transparent
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 0.8, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          />
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
