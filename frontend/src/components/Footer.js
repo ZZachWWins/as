@@ -1,4 +1,4 @@
-// src/components/Footer.js (Modern Sleek: Light Theme, Gradient Underline on Hover, Centered, Form Glow)
+// src/components/Footer.js (Modern Sleek: Light Theme, Gradient Circles, Frosted Glass, Form Glow)
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -48,13 +48,13 @@ const Footer = () => {
             </motion.h3>
             <nav className="space-y-3">
               <motion.div variants={itemVariants}>
-                <Link to="/" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group" style={{ textDecoration: 'none' }}>
-                  <FiHome className="text-sm opacity-70 group-hover:opacity-100" /> Home
+                <Link to="/" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-2" style={{ textDecoration: 'none' }}>
+                  <FiHome className="text-lg opacity-70 group-hover:opacity-100" /> Home
                 </Link>
               </motion.div>
               <motion.div variants={itemVariants}>
-                <Link to="/shop" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group" style={{ textDecoration: 'none' }}>
-                  <FiShoppingBag className="text-sm opacity-70 group-hover:opacity-100" /> Shop
+                <Link to="/shop" className="block btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-2 group rounded-full bg-white/20 backdrop-blur-md p-2" style={{ textDecoration: 'none' }}>
+                  <FiShoppingBag className="text-lg opacity-70 group-hover:opacity-100" /> Shop
                 </Link>
               </motion.div>
             </nav>
@@ -68,11 +68,11 @@ const Footer = () => {
               Fuel your potential with science-backed energy boosts that last.
             </motion.p>
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-sm justify-center lg:justify-start">
-              <a href="/privacy-policy" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group" style={{ textDecoration: 'none' }}>
-                <FiShield className="text-xs" /> Privacy
+              <a href="/privacy-policy" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group rounded-full bg-white/20 backdrop-blur-md p-2" style={{ textDecoration: 'none' }}>
+                <FiShield className="text-lg" /> Privacy
               </a>
-              <a href="/terms-of-service" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group" style={{ textDecoration: 'none' }}>
-                <FiFileText className="text-xs" /> Terms
+              <a href="/terms-of-service" className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center lg:justify-start gap-1 group rounded-full bg-white/20 backdrop-blur-md p-2" style={{ textDecoration: 'none' }}>
+                <FiFileText className="text-lg" /> Terms
               </a>
             </motion.div>
           </motion.div>
@@ -113,34 +113,46 @@ const Footer = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <motion.a 
-              href="mailto:hello@activatesupplement.com" 
-              className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 text-2xl p-3 rounded-lg hover:bg-red-50" style={{ textDecoration: 'none' }}
-              whileHover={{ rotate: 360, scale: 1.1 }}
+            <motion.div 
+              className="rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
+              whileHover={{ scale: 1.1, rotate: 360 }}
               whileTap={{ scale: 0.95 }}
             >
-              <FiMail />
-            </motion.a>
-            <motion.a 
-              href="https://twitter.com/activate_supplement" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 text-2xl p-3 rounded-lg hover:bg-red-50" style={{ textDecoration: 'none' }}
-              whileHover={{ rotate: 360, scale: 1.1 }}
+              <a 
+                href="mailto:hello@activatesupplement.com" 
+                className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center text-2xl" style={{ textDecoration: 'none' }}
+              >
+                <FiMail />
+              </a>
+            </motion.div>
+            <motion.div 
+              className="rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
+              whileHover={{ scale: 1.1, rotate: 360 }}
               whileTap={{ scale: 0.95 }}
             >
-              <FiTwitter />
-            </motion.a>
-            <motion.a 
-              href="https://facebook.com/activate_supplement" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 text-2xl p-3 rounded-lg hover:bg-red-50" style={{ textDecoration: 'none' }}
-              whileHover={{ rotate: 360, scale: 1.1 }}
+              <a 
+                href="https://twitter.com/activate_supplement" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center text-2xl" style={{ textDecoration: 'none' }}
+              >
+                <FiTwitter />
+              </a>
+            </motion.div>
+            <motion.div 
+              className="rounded-full bg-white/20 backdrop-blur-md p-3 border-2 border-transparent hover:border-[linear-gradient(90deg,#ff0000,#ffaa00,#00aaff)] transition-all duration-300"
+              whileHover={{ scale: 1.1, rotate: 360 }}
               whileTap={{ scale: 0.95 }}
             >
-              <FiFacebook />
-            </motion.a>
+              <a 
+                href="https://facebook.com/activate_supplement" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="btn-outline text-gray-600 hover:text-red-500 transition-all duration-300 flex items-center justify-center text-2xl" style={{ textDecoration: 'none' }}
+              >
+                <FiFacebook />
+              </a>
+            </motion.div>
           </motion.div>
         </div>
 
