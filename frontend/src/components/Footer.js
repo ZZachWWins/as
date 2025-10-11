@@ -39,27 +39,26 @@ const Footer = () => {
     let animationFrameId;
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = 200; // Full footer height approximation
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight; // Dynamic height matching footer
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
     const blobs = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) { // Reduced for subtlety in footer
       blobs.push({
-        x: Math.random() * canvas.width * 0.5, // Start in left half
-        y: canvas.height - Math.random() * 50, // Near bottom
-        vx: (Math.random() - 0.3) * 0.3, // Slower horizontal movement
-        vy: (Math.random() - 0.5) * 0.2, // Slight vertical drift
-        radius: Math.random() * 60 + 30, // Larger blobs
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.8, // Gentle movement
+        vy: (Math.random() - 0.5) * 0.5,
+        radius: Math.random() * 40 + 20, // Smaller for footer scale
       });
     }
 
     const animate = () => {
+      // Clear with transparency for blending
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Subtle background tint
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       blobs.forEach(blob => {
         ctx.beginPath();
@@ -67,18 +66,38 @@ const Footer = () => {
           blob.x, blob.y, 0,
           blob.x, blob.y, blob.radius
         );
-        gradient.addColorStop(0, '#ff0000'); // Red
-        gradient.addColorStop(0.5, '#ffaa00'); // Yellow
-        gradient.addColorStop(1, '#00aaff'); // Blue
+        gradient.addColorStop(0, 'rgba(255, 0, 0, 0.2)');
+        gradient.addColorStop(0.5, 'rgba(255, 170, 0, 0.2)');
+        gradient.addColorStop(1, 'rgba(0, 170, 255, 0.2)');
         ctx.fillStyle = gradient;
+        ctx.globalAlpha = 0.4; // Low opacity for background blend
         ctx.arc(blob.x, blob.y, blob.radius, 0, Math.PI * 2);
         ctx.fill();
 
+        // Subtle connections for fluidity
+        blobs.forEach(other => {
+          if (other !== blob) {
+            const dx = blob.x - other.x;
+            const dy = blob.y - other.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            if (distance < 100) {
+              ctx.beginPath();
+              ctx.moveTo(blob.x, blob.y);
+              ctx.lineTo(other.x, other.y);
+              ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - distance / 1000})`;
+              ctx.lineWidth = 0.5;
+              ctx.globalAlpha = 0.2;
+              ctx.stroke();
+            }
+          }
+        });
+        ctx.globalAlpha = 1;
+
+        // Update position, confined to canvas
         blob.x += blob.vx;
         blob.y += blob.vy;
-        if (blob.x < 0) blob.x = 0;
-        if (blob.x > canvas.width * 0.5) blob.x = canvas.width * 0.5; // Confine to left half
-        if (blob.y < canvas.height - 100 || blob.y > canvas.height) blob.vy *= -1; // Bounce vertically
+        if (blob.x < blob.radius || blob.x > canvas.width - blob.radius) blob.vx *= -1;
+        if (blob.y < blob.radius || blob.y > canvas.height - blob.radius) blob.vy *= -1;
       });
 
       animationFrameId = requestAnimationFrame(animate);
@@ -96,12 +115,16 @@ const Footer = () => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
-      className="relative bg-white/95 backdrop-blur-md text-gray-800 py-16 border-t border-red-100 shadow-lg"
+      className="relative bg-white/10 backdrop-blur-2xl text-gray-800 py-16 border-t border-red-100 shadow-lg overflow-hidden"
       variants={columnVariants}
       animate="visible"
     >
-      <canvas ref={canvasRef} className="absolute bottom-0 left-0 w-full h-full z-0 pointer-events-none" style={{ height: '100%' }} />
-      <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-yellow-500 opacity-50"></div>
+      <canvas 
+        ref={canvasRef} 
+        className="absolute inset-0 w-full h-full z-0 pointer-events-none" 
+        style={{ mixBlendMode: 'screen' }}
+      />
+      <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-yellow-500 opacity-50 z-10"></div>
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-12 justify-items-center">
           <motion.div variants={columnVariants} className="space-y-6 text-center lg:text-left">
@@ -221,7 +244,7 @@ const Footer = () => {
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="text-center text-gray-500 text-sm tracking-wide"
+          className="text-center text-gray-500 text-sm tracking-wide relative z-10"
         >
           &copy; 2025 Activate Supplement. Fuel Your Potential. All rights reserved.
         </motion.p>
