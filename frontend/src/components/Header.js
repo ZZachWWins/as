@@ -17,8 +17,8 @@ const Header = () => {
     <motion.header 
       initial={{ y: -100 }} 
       animate={{ y: 0 }} 
+      transition={{ duration: 0.5, ease: "easeOut" }}
       className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md shadow-lg z-50 border-b border-red-100"
-      style={{ transform: `translateY(${Math.max(0, window.scrollY * 0.1)}px)` }}
     >
       <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 md:gap-0">
         <Link to="/" className="flex-shrink-0">

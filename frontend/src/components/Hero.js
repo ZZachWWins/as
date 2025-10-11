@@ -34,29 +34,35 @@ const Hero = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    let lastScrollY = 0;
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      if (Math.abs(scrollY - lastScrollY) > 10) {
-        for (let i = 0; i < 5; i++) {
-          particles.current.push(createParticle(
-            Math.random() * canvas.width,
-            Math.random() * canvas.height * 0.3
-          ));
+    let lastScrollTime = 0;
+    const throttle = (func, limit) => {
+      let inThrottle;
+      return (...args) => {
+        if (!inThrottle) {
+          func(...args);
+          inThrottle = true;
+          setTimeout(() => (inThrottle = false), limit);
         }
-        lastScrollY = scrollY;
-      }
+      };
     };
+    const handleScroll = throttle(() => {
+      for (let i = 0; i < 5; i++) {
+        particles.current.push(createParticle(
+          Math.random() * canvas.width,
+          Math.random() * canvas.height * 0.3
+        ));
+      }
+    }, 200);
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.current.forEach((p, i) => {
+      particles.current = particles.current.filter((p) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.life;
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 5; // Reduced blur for performance
         ctx.shadowColor = p.color;
         ctx.fill();
         ctx.shadowBlur = 0;
@@ -66,9 +72,7 @@ const Hero = () => {
         p.life -= p.decay;
         p.size *= 0.99;
 
-        if (p.life <= 0 || p.size < 0.5 || p.x < 0 || p.x > canvas.width || p.y > canvas.height) {
-          particles.current.splice(i, 1);
-        }
+        return p.life > 0 && p.size > 0.5 && p.x > 0 && p.x < canvas.width && p.y < canvas.height;
       });
       ctx.globalAlpha = 1;
       animationFrameId = requestAnimationFrame(animate);
@@ -76,7 +80,7 @@ const Hero = () => {
     animate();
 
     setTimeout(() => {
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 20; i++) {
         particles.current.push(createParticle(canvas.width / 2, canvas.height / 2));
       }
     }, 500);
@@ -92,7 +96,7 @@ const Hero = () => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = rect.left + rect.width / 2 + window.scrollX;
     const y = rect.top + rect.height / 2 + window.scrollY;
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 20; i++) { // Reduced from 50 to 20
       setTimeout(() => {
         particles.current.push(createParticle(x, y, isIcon));
       }, i * 5);

@@ -64,8 +64,7 @@ header {
   align-items: center; 
   gap: 0.5rem;
   padding: 1rem 2rem; 
-  background: rgba(255,255,255,0.1); 
-  backdrop-filter: blur(10px); 
+  background: linear-gradient(90deg, #ff0000, #ffaa00, #00aaff); /* Red to Yellow to Blue */
   border: 1px solid rgba(255,255,255,0.2); 
   color: white; 
   text-decoration: none; 
@@ -73,8 +72,8 @@ header {
   font-weight: 600; 
   text-transform: uppercase; 
   letter-spacing: 0.5px; 
-  box-shadow: 0 4px 15px rgba(220,53,69,0.2); 
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+  transition: all 0.3s ease; 
   position: relative; 
   overflow: hidden; 
 }
@@ -85,14 +84,13 @@ header {
   left: -100%; 
   width: 100%; 
   height: 100%; 
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); 
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); 
   transition: left 0.5s; 
 }
 .btn:hover::before { left: 100%; }
 .btn:hover { 
   transform: translateY(-3px) scale(1.05); 
-  box-shadow: 0 8px 25px rgba(220,53,69,0.4); 
-  background: rgba(255,255,255,0.2); 
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3); 
 }
 .btn-outline { 
   background: transparent; 
@@ -100,10 +98,23 @@ header {
   color: white; 
 }
 .btn-outline:hover { 
-  background: linear-gradient(135deg, #dc3545, #fd7e14); 
+  background: linear-gradient(90deg, #ff0000, #ffaa00, #00aaff); /* Red to Yellow to Blue */
   border-color: transparent; 
   color: white; 
+  box-shadow: 0 0 10px rgba(255,170,0,0.5); /* Subtle glow */
 }
+.btn-outline::after { 
+  content: ''; 
+  position: absolute; 
+  bottom: -2px; 
+  left: 5%; 
+  width: 90%; 
+  height: 2px; 
+  background: linear-gradient(90deg, #ff0000, #ffaa00, #00aaff); 
+  transform: scaleX(0); 
+  transition: transform 0.3s ease; 
+}
+.btn-outline:hover::after { transform: scaleX(1); }
 
 /* Urgency: Bold Slide-In */
 .urgency { 
@@ -123,79 +134,24 @@ header {
 /* Benefits: Card Glow */
 .benefits-grid { 
   display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
   gap: 2rem; 
-  margin-top: 3rem; 
 }
-.benefit-item { 
-  text-align: center; 
-  padding: 2.5rem; 
+.benefits-card { 
   background: rgba(255,255,255,0.95); 
   backdrop-filter: blur(10px); 
-  border-radius: 1rem; 
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
+  border-radius: 1.5rem; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+  overflow: hidden; 
   border: 1px solid rgba(220,53,69,0.1); 
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+  transition: all 0.3s ease; 
 }
-.benefit-item:hover { 
-  transform: translateY(-10px); 
-  box-shadow: 0 15px 40px rgba(220,53,69,0.2); 
-}
-.benefit-icon { 
-  font-size: 3.5rem; 
-  display: block; 
-  margin-bottom: 1rem; 
-  filter: drop-shadow(0 2px 4px rgba(220,53,69,0.3)); 
-  animation: float 3s ease-in-out infinite; 
-}
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-
-/* Testimonials: Quote Cards with Pop */
-.testimonial-grid { 
-  display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-  gap: 2rem; 
-  margin-top: 3rem; 
-}
-.testimonial { 
-  background: rgba(255,255,255,0.95); 
-  padding: 2.5rem; 
-  border-radius: 1rem; 
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08); 
-  position: relative; 
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-  border: 1px solid rgba(220,53,69,0.1); 
-}
-.testimonial::before { 
-  content: '"'; 
-  font-size: 6rem; 
-  color: #fd7e14; 
-  position: absolute; 
-  top: -10px; 
-  left: 20px; 
-  font-family: serif; 
-  opacity: 0.8; 
-}
-.testimonial:hover { 
-  transform: translateY(-5px); 
-  box-shadow: 0 15px 40px rgba(220,53,69,0.2); 
-}
-.testimonial-author { 
-  font-weight: 600; 
-  color: #dc3545; 
-  margin-top: 1rem; 
-  display: flex; 
-  align-items: center; 
-  gap: 0.5rem; 
+.benefits-card:hover { 
+  box-shadow: 0 15px 40px rgba(220,53,69,0.15); 
+  transform: translateY(-2px); 
 }
 
-/* FAQ: Sleek Accordion */
-.faq-grid { 
-  display: grid; 
-  gap: 1rem; 
-  max-width: 800px; 
-  margin: 0 auto; 
-}
+/* FAQ Styling */
 .faq-card { 
   background: rgba(255,255,255,0.95); 
   backdrop-filter: blur(10px); 
@@ -309,7 +265,7 @@ select {
 :root { --parallax-speed: 0.5; }
 .parallax-bg { background-attachment: fixed; background-size: cover; background-position: center; will-change: transform; }
 #particles-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-@keyframes ignite-burst { 0% { opacity: 1; transform: scale(0) rotate(0deg); } 50% { opacity: 0.8; transform: scale(1.5) rotate(180deg); } 100% { opacity: 0; transform: scale(0) rotate(360deg); } }
+@keyframes ignite-burst { 0% { opacity: 1; transform: scale(0); } 50% { opacity: 0.8; transform: scale(1.5); } 100% { opacity: 0; transform: scale(0); } }
 .particle { animation: ignite-burst 0.6s ease-out forwards; }
 
 /* Staggered Reveals */
