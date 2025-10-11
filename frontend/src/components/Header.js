@@ -1,5 +1,5 @@
-// src/components/Header.js (Fixed: Proper Burger Menu Structure, No Full-Screen Icon Issue)
-import React, { useState } from 'react';
+// src/components/Header.js (Fixed: Conditional Mobile Rendering for Burger - No Desktop Visibility)
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { slide as Menu } from 'react-burger-menu'; // npm i react-burger-menu
@@ -8,6 +8,14 @@ import { FiHome, FiShoppingBag, FiUsers, FiMenu, FiX } from 'react-icons/fi'; //
 const Header = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Initial check
+
+  // Listen for resize to toggle mobile/desktop
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const menuVariants = {
     hidden: { x: '-100%' },
@@ -63,8 +71,8 @@ const Header = () => {
         </div>
       </nav>
 
-      {/* Mobile Nav - Sidebar Only, No Overlay */}
-      <div className="md:hidden">
+      {/* Mobile Nav - Conditionally Rendered Only on Mobile */}
+      {isMobile && (
         <Menu
           isOpen={isOpen}
           onStateChange={(state) => setIsOpen(state.isOpen)}
@@ -125,7 +133,7 @@ const Header = () => {
             ))}
           </AnimatePresence>
         </Menu>
-      </div>
+      )}
     </motion.header>
   );
 };
