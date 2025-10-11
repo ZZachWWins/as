@@ -1,4 +1,4 @@
-// src/components/Header.js (Ultimate: Mobile Burger, Icon Nav, Scroll Parallax - No Overlay, Desktop-Free)
+// src/components/Header.js (Fixed: Proper Burger Menu Structure, No Full-Screen Icon Issue)
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -73,7 +73,7 @@ const Header = () => {
           pageWrapId="page-wrap"
           outerContainerId="outer-container"
           width="280"  // Compact sidebar
-          noOverlay={true}  // Fixed: No full-screen backdrop—pure drawer
+          noOverlay={true}  // No full-screen backdrop—pure drawer
           disableOverlayClick={true}  // No close on outside (use cross)
           burgerBarClassName="bg-red-500"
           burgerButtonClassName="ml-4"
@@ -126,11 +126,6 @@ const Header = () => {
           </AnimatePresence>
         </Menu>
       </div>
-
-      {/* Page Wrap for Burger Menu */}
-      <main id="page-wrap">
-        {/* Content goes here – injected by router */}
-      </main>
     </motion.header>
   );
 };

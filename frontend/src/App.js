@@ -1,4 +1,4 @@
-// src/App.js (Enhanced: Lenis Smooth Scroll, Theme Context if Needed Later)
+// src/App.js (Enhanced: Lenis Smooth Scroll, Theme Context if Needed Later + Burger Menu Fix: Outer Container & Page Wrap)
 import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -44,12 +44,14 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col">
+      <div id="outer-container" className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-1" role="main" aria-label="Main content">
-          <AnimatedRoutes />
-        </main>
-        <Footer />
+        <div id="page-wrap" className="flex-1 flex flex-col">
+          <main className="flex-1" role="main" aria-label="Main content">
+            <AnimatedRoutes />
+          </main>
+          <Footer />
+        </div>
       </div>
     </Router>
   );
